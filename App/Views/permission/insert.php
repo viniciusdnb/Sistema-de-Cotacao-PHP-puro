@@ -1,6 +1,6 @@
 
-                <div>
-                    <ol>
+    <div>
+        <ol>
                         <li>Adm</li>
                         <li>Permissões</li>
                         <li><a href="http://<?php echo APP_HOST ?>/permission/index">Listar</a></li>

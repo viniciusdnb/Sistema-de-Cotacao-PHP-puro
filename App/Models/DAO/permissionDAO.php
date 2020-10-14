@@ -10,7 +10,28 @@
 
         public function findId($id)
         {
+            $result = $this->select("SELECT id, type, type_name, perm, perm_name FROM permission WHERE id = '$id'");
 
+            if($result)
+            {
+                $dataSetPerm = $result->fetchAll();
+                foreach ($dataSetPerm as $value) 
+                {
+                    $perm = new Permission();
+                    $perm->setId($value['id']);
+                    $perm->setType($value['type']);
+                    $perm->setTypeName($value['type_name']);
+                    $perm->setPerm($value['perm']);
+                    $perm->setPermName($value['perm_name']);
+                }
+                return $perm;
+            }
+            else
+            {
+                return FALSE;
+            }
+
+            
         }
 
         public function findAll()
@@ -71,12 +92,41 @@
 
         public function updatePerm(Permission $permission)
         {
+        try {
 
+            $id         = $permission->getId();
+            $type       = $permission->getType();
+            $typeName   = $permission->getTypeName();
+            $perm       = $permission->getPerm();
+            $permName   = $permission->getPermName();
+
+            return $this->update('permission', 'type = :type, type_name = :type_name, perm = :perm, perm_name = :perm_name',
+                [
+                    ':id'           => $id,
+                    ':type'         => $type,
+                    ':type_name'    => $typeName,
+                    ':perm'         => $perm,
+                    ':perm_name'    => $permName,
+                ],
+
+                'id = :id'
+
+                );
+        } catch (\Exception $ex) {
+            throw new Exception("Erro na atualização " . $ex->getMessage(), 500);
+        }
+        
         }
 
         public function deletePerm(Permission $permission)
         {
+            try {
+                $id = $permission->getId();
 
+                return $this->delete('permission', "id = '$id'");
+            } catch (\Exception $ex) {
+                throw new Exception("Erro ao deletar " . $ex->getMessage(), 500);
+            }
         }
 
     }

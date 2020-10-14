@@ -39,8 +39,8 @@ class PermissionController extends Controller
                 $perm->setPerm($codPerm);
                 $perm->setPermName($namePerm);
 
-                $permInsert = new PermissionDAO();
-                $permInsert->insertPerm($perm);
+                $permDAO = new PermissionDAO();
+                $permDAO->insertPerm($perm);
                 Session::unsetMessage();
                 Session::setMessage('Permissão cadastrada com Sucesso!'); 
                 $this->redirect('/permission/index');               
@@ -51,4 +51,62 @@ class PermissionController extends Controller
                 
             }
         }
+
+       public function edit($params)
+       {
+            $id = $params[0];
+
+            $permDAO = new PermissionDAO();
+
+            $this->setViewParam('perm', $permDAO->findId($id));
+            
+            $this->render('/permission/edit');
+
+       }
+
+       public function update()
+       {
+        if ($_POST) {
+
+            $id = filter_var($_POST['id'], FILTER_SANITIZE_SPECIAL_CHARS);
+            $codType = filter_var($_POST['txt_cod_type'], FILTER_SANITIZE_SPECIAL_CHARS);
+            $nameType = filter_var($_POST['txt_name_perm'], FILTER_SANITIZE_SPECIAL_CHARS);
+            $codPerm = filter_var($_POST['txt_cod_perm'], FILTER_SANITIZE_SPECIAL_CHARS);
+            $namePerm = filter_var($_POST['txt_name_perm'], FILTER_SANITIZE_SPECIAL_CHARS);
+
+            $perm = new Permission();
+            $perm->setId($id);
+            $perm->setType($codType);
+            $perm->setTypeName($nameType);
+            $perm->setPerm($codPerm);
+            $perm->setPermName($namePerm);
+
+            $permDAO = new PermissionDAO();
+            $permDAO->updatePerm($perm);
+            
+            Session::unsetMessage();
+            Session::setMessage('Permissão atualizada com Sucesso!');
+            $this->redirect('/permission/index');
+        } else {
+            Session::unsetErro();
+            Session::setErro('Nao foi Possivel atualizar, tente novamente mais tarde');
+            $this->redirect('/permission/index');
+        }
+       }
+
+       public function delete($params)
+       {
+           
+            $id = $params[0];
+            $perm = new Permission();
+            $perm->setId($id);
+
+            $permDAO = new PermissionDAO();
+            $permDAO->deletePerm($perm);
+            
+            $this->redirect('/permission/index');
+
+
+
+       }
     }
