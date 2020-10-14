@@ -57,7 +57,7 @@
                                 <div>
                                     <button type="submit">Salvar</button>
                                     <a href="http://<?php echo APP_HOST; ?>/user/index">Cancelar</a>
-                                    <a href="http://<?php echo APP_HOST; ?>/user/delete">Excluir</a>
+                                    
                                 </div>
                             </form>
                         

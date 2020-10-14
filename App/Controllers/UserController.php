@@ -19,16 +19,7 @@ class UserController extends Controller
 
         $this->render('/user/index');
 
-    }
-    public function findId()
-    {
-
-    }
-    
-    public function findAll()
-    {
-
-    }
+    }    
 
     public function new()
     {
@@ -69,13 +60,55 @@ class UserController extends Controller
         }
     }
 
+    public function edit($params)
+    {
+        $id = $params[0];
+
+        $userDAO = new UserDAO();
+        $this->setViewParam('findIdUser', $userDAO->findId($id));
+        
+        $perm = new PermissionDAO();
+        $this->setViewParam('findAllPerm', $perm->findAll());
+
+        $this->render('/user/edit');
+        
+    }
+
     public function update()
     {
+        
+        var_dump($_POST);
+       if (isset($_POST)) {
+            
+            
+            $name = filter_var($_POST['txt_name'], FILTER_SANITIZE_SPECIAL_CHARS);
+                       
+            $active = filter_var($_POST['txt_active'], FILTER_SANITIZE_SPECIAL_CHARS);
+            $perm = filter_var($_POST['txt_perm'], FILTER_SANITIZE_SPECIAL_CHARS);
+
+            $user = new User();
+            $user->setId(2);
+            $user->setName($name);            
+            $user->setActive($active);
+            $user->setIdPerm($perm);
+
+            $userDAO = new UserDAO();
+            $userDAO->updateUser($user);
+
+           
+
+
+            
+            
+
+
+
+        }else {
+           
+        }
 
     }
 
-    public function delet()
-    {
-
-    }
+    
+    
 }

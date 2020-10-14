@@ -47,11 +47,11 @@ if ($Session::getErro() !== "") {
 
                 foreach ($viewVar['findAll'] as $value) {
                     echo "<tr>";
-                    echo "<td>" . $value->getId() . "</td>";
-                    echo "<td>" . $value->getName() . "</td>";
-                    echo "<td>" . $value->getActive() . "</td>";
-                    echo "<td>" . $value->getTypeNamePerm() . "</td>";
-                    echo "<td>" . $value->getPermName() . "</td>";
+                    echo "<td><a href=http://" . APP_HOST . "/user/edit/" . $value->getId() . ">" . $value->getId() . "</a></td>";
+                    echo "<td><a href='#'>" . $value->getName() . "</a></td>";
+                    echo "<td><a href='#'>" . $value->getActive() . "</a></td>";
+                    echo "<td><a href='#'>" . $value->getTypeNamePerm() . "</a></td>";
+                    echo "<td><a href='#'>" . $value->getPermName() . "</td>";
                     echo "</tr>";
                 }
 

@@ -111,24 +111,24 @@
         {
             try {
                 $id     = $user->getId();
-                $name   = $user->getName();
-                $pass   = $user->getPass();
+                $name   = $user->getName();                
                 $active = $user->getActive();
                 $idperm = $user->getIdPerm();
                 
-                return $this->update('user', 'name = :name, pass = :pass, active = :active, id_perm = :id_perm',
+                return $this->update('user', 'name = :name, active = :active, id_perm = :id_perm',
                     [
                         ':id'       => $id,
-                        ':name'     => $name,
-                        ':pass'     => $pass,
+                        ':name'     => $name,                        
                         ':active'   => $active,
                         ':id_perm'  => $idperm,
                     ],
                     "id = :id"
                 );
+                
 
             } catch (\Exception $ex) {
                 throw new Exception("Erro na Atualização dos dados " . $ex->getMessage(), 500);
+                
             }
         }
 
