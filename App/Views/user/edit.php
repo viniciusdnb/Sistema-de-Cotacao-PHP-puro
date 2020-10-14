@@ -23,7 +23,7 @@
             <label>Nome:</label>
             <input type="text" name="txt_name" value="<?php echo $viewVar['findIdUser']->getName(); ?>">
         </div>
-       
+
         <div>
 
             <div>
@@ -40,40 +40,35 @@
             <div>
                 <label>Permissão:</label>
 
-                
-                
+
+
 
                 <select name="txt_perm">
 
-                    <?php                                        
-                   
-                        use App\Libs\FunctionPublic;
-                    
+                    <?php
 
-                        foreach ($viewVar['findAllPerm'] as $value) {
-                            echo '<option value="' . $value->getId() . '"';
-                            
-                        if($value->getId() == FunctionPublic::idPerm($viewVar))
-                        {
-                                echo ' selected="selected"';
+                    use App\Libs\FunctionPublic;
+
+
+                    foreach ($viewVar['findAllPerm'] as $value) {
+                        echo '<option value="' . $value->getId() . '"';
+
+                        if ($value->getId() == FunctionPublic::idPerm($viewVar)) {
+                            echo ' selected="selected"';
                         }
-                            
-                            echo '>' . $value->getType() . '. ' . $value->getTypeName() . ' - ' . $value->getPerm() . '. ' . $value->getPermName() . '</option>';
-                        }
+
+                        echo '>' . $value->getType() . '. ' . $value->getTypeName() . ' - ' . $value->getPerm() . '. ' . $value->getPermName() . '</option>';
+                    }
 
                     ?>
 
                 </select>
             </div>
 
-
-
-
-        </div>
-        <div>
+            <input type="hidden" name="id" value="<?php echo $viewVar['findIdUser']->getId(); ?>" </div> <div>
             <button type="submit">Atualizar</button>
             <a href="http://<?php echo APP_HOST; ?>/user/index">Cancelar</a>
-            <a href="http://<?php echo APP_HOST; ?>/user/delete">Excluir</a>
+            <a href="http://<?php echo APP_HOST; ?>/user/delete/<?php echo $viewVar['findIdUser']->getId(); ?>">Excluir</a>
         </div>
     </form>
 

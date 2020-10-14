@@ -48,10 +48,10 @@ if ($Session::getErro() !== "") {
                 foreach ($viewVar['findAll'] as $value) {
                     echo "<tr>";
                     echo "<td><a href=http://" . APP_HOST . "/user/edit/" . $value->getId() . ">" . $value->getId() . "</a></td>";
-                    echo "<td><a href='#'>" . $value->getName() . "</a></td>";
-                    echo "<td><a href='#'>" . $value->getActive() . "</a></td>";
-                    echo "<td><a href='#'>" . $value->getTypeNamePerm() . "</a></td>";
-                    echo "<td><a href='#'>" . $value->getPermName() . "</td>";
+                    echo "<td><a href=http://" . APP_HOST . "/user/edit/" . $value->getId() . ">" . $value->getName() . "</a></td>";
+                    echo "<td><a href=http://" . APP_HOST . "/user/edit/" . $value->getId() . ">" . $value->getActive() . "</a></td>";
+                    echo "<td><a href=http://" . APP_HOST . "/user/edit/" . $value->getId() . ">" . $value->getTypeNamePerm() . "</a></td>";
+                    echo "<td><a href=http://" . APP_HOST . "/user/edit/" . $value->getId() . ">" . $value->getPermName() . "</td>";
                     echo "</tr>";
                 }
 

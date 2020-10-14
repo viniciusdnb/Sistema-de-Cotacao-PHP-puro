@@ -53,15 +53,18 @@ class UserController extends Controller
             Session::unsetMessage();
             Session::setMessage('Usuarioa cadastrado com sucesso!');
             $this->redirect('/user/index'); 
-        }else{
+        }
+        else
+        {
             Session::unsetMessage();
-            Session::setErro('nao foi posivel cadastra por gentileza tente novamente');
+            Session::setErro('nao foi posivel cadastrar por gentileza tente novamente');
             $this->redirect('/user/index'); 
         }
     }
 
     public function edit($params)
     {
+        
         $id = $params[0];
 
         $userDAO = new UserDAO();
@@ -75,19 +78,20 @@ class UserController extends Controller
     }
 
     public function update()
-    {
+    {               
         
-        var_dump($_POST);
-       if (isset($_POST)) {
+        
+       if (isset($_POST)) 
+       {  
             
-            
+
             $name = filter_var($_POST['txt_name'], FILTER_SANITIZE_SPECIAL_CHARS);
-                       
+            $id = filter_var($_POST['id'], FILTER_SANITIZE_SPECIAL_CHARS);           
             $active = filter_var($_POST['txt_active'], FILTER_SANITIZE_SPECIAL_CHARS);
             $perm = filter_var($_POST['txt_perm'], FILTER_SANITIZE_SPECIAL_CHARS);
 
             $user = new User();
-            $user->setId(2);
+            $user->setId($id);
             $user->setName($name);            
             $user->setActive($active);
             $user->setIdPerm($perm);
@@ -95,18 +99,48 @@ class UserController extends Controller
             $userDAO = new UserDAO();
             $userDAO->updateUser($user);
 
-           
+            Session::unsetMessage();
+            Session::setMessage("Atualizado com sucesso!"); 
 
+            $this->redirect('/user/index');
 
-            
-            
-
-
-
-        }else {
-           
+        }
+        else 
+        {
+            Session::unsetMessage();
+            Session::setErro('nao foi posivel atualizar por gentileza tente novamente');
+            $this->redirect('/user/index'); 
         }
 
+    }
+
+    public function delete($params)
+    {
+        
+        if($params)
+        {
+            $id = $params[0];
+            
+            $user = new User();
+            $user->setId($id);
+
+            $userDAO = new UserDAO();
+            $userDAO->deleteUser($user);
+
+            Session::unsetMessage();
+            Session::setMessage("Deletado com sucesso!");
+
+            $this->redirect('/user/index'); 
+
+        }
+        else
+        {
+            Session::unsetMessage();
+            Session::setErro('nao foi posivel deletar por gentileza tente novamente');
+            $this->redirect('/user/index');             
+        }      
+
+        
     }
 
     
