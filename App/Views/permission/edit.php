@@ -6,6 +6,10 @@
         <li><a href="#">Cadastrar</a></li>
     </ol>
 </div>
+<?php 
+   
+    
+?>
 
 <section>
     <div>

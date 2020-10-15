@@ -102,9 +102,19 @@ class PermissionController extends Controller
             $perm->setId($id);
 
             $permDAO = new PermissionDAO();
-            $permDAO->deletePerm($perm);
+            if($permDAO->deletePerm($perm))
+            {
+                Session::unsetErro();
+                Session::setMessage('registro excluido com sucesso');
+                
+                $this->redirect('/permission/index');
+            }else {
+                Session::unsetErro();
+                Session::setMessage('Não foi possivel excluir, a permissão esta sendo usado por outro registro');
+                $this->redirect('/permission/index');
+            }
             
-            $this->redirect('/permission/index');
+            
 
 
 

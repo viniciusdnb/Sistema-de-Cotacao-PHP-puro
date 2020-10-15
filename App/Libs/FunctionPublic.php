@@ -4,7 +4,40 @@
 
     class FunctionPublic
     {
-        public static function idPerm($viewVar)
+        private $nameObj = [];
+        private $action = [];
+        private $viewVar;
+
+        public function __construct($viewVar, array $nameObj,array $action)
+        {
+            $this->nameObj[] = $nameObj;
+            $this->action[] = $action;
+            $this->viewVar = $viewVar;
+        }
+
+        public function cbxSelect()
+        {
+            $q = count($this->viewVar[$this->nameObj[0]]);
+            $a = 0;
+
+            while ($a < $q) 
+            {
+                if($this->viewVar[$this->nameObj[1]]->{$this->action[1]} == $this->viewVar[$this->nameObj[0]]->{$this->action} )
+                {
+                    return $this->viewVar[$this->nameObj[1]]->{$this->action[1]};
+                }
+            }
+        }
+
+
+
+
+
+
+
+
+
+        public static function cbxPerm($viewVar)
         {
             $q = count($viewVar['findAllPerm']);
             $a = 0;
@@ -17,7 +50,7 @@
             }
         }
 
-        public static function cbxSelect($viewVar, array $viewName, array $getName)
+        public static function cbx1Select($viewVar, array $viewName, array $getName)
         {
             //primeira posição do array $viewName que sera usado para fazer a contagem
             //segunda posição do array $viewName sera usada para comparação

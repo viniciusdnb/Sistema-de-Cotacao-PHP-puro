@@ -3,6 +3,7 @@
     require_once __DIR__ . "/vendor/autoload.php";
 
     use App\App;
+    use App\Libs\Error;
 
     session_start();
 
@@ -13,7 +14,8 @@
         $start->run();
         
     } catch (\Exception $ex) {
-        echo $ex->getMessage();
+        $erro = new Error($ex);
+        $erro->render();
     }
 
 ?>

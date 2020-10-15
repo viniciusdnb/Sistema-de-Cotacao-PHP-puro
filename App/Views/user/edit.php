@@ -53,7 +53,7 @@
                     foreach ($viewVar['findAllPerm'] as $value) {
                         echo '<option value="' . $value->getId() . '"';
 
-                        if ($value->getId() == FunctionPublic::idPerm($viewVar)) {
+                        if ($value->getId() == FunctionPublic::cbxPerm($viewVar)) {
                             echo ' selected="selected"';
                         }
 

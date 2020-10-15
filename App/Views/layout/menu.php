@@ -47,9 +47,9 @@
                             </a>
                         </li>
                         <li>
-                            <a href="http://<?php echo APP_HOST; ?>">
+                            <a href="http://<?php echo APP_HOST; ?>/factory/index">
 
-                                <p>Cadastro de Clientes</p>
+                                <p>Cadastro de Fornecedores</p>
                             </a>
                         </li>
                         <li>

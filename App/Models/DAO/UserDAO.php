@@ -140,7 +140,13 @@
 
                 $id = $user->getId();
 
-                return $this->delete('user', "id = '$id'");
+                if($this->delete('user', "id = '$id'"))
+                {
+                    return TRUE;
+                }
+                else {
+                    return FALSE;
+                }
 
             } catch (\Exception $ex) {
                 throw new Exception("Erro ao excluir " . $ex->getMessage(), 500);

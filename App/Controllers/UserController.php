@@ -125,12 +125,19 @@ class UserController extends Controller
             $user->setId($id);
 
             $userDAO = new UserDAO();
-            $userDAO->deleteUser($user);
+            if($userDAO->deleteUser($user))
+            {
+                Session::unsetMessage();
+                Session::setMessage("Deletado com sucesso!");
 
-            Session::unsetMessage();
-            Session::setMessage("Deletado com sucesso!");
-
-            $this->redirect('/user/index'); 
+                $this->redirect('/user/index'); 
+            }
+            else 
+            {
+                Session::unsetErro();
+                Session::setMessage('Não foi possivel excluir, o usuario esta sendo usado por outro registro');
+                $this->redirect('/user/index');
+            }
 
         }
         else

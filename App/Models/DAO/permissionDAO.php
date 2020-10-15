@@ -123,7 +123,15 @@
             try {
                 $id = $permission->getId();
 
-                return $this->delete('permission', "id = '$id'");
+                if($this->delete('permission', "id = '$id'"))
+                {
+                    return TRUE;
+                }
+                else 
+                {
+                    return FALSE;    
+                }
+
             } catch (\Exception $ex) {
                 throw new Exception("Erro ao deletar " . $ex->getMessage(), 500);
             }
