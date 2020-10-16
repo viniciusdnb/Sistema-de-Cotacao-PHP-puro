@@ -54,7 +54,9 @@
 
                     $findAll[] = $perm;
                 }
+                
                 return $findAll;
+                
                 
             }else {
                 return false;

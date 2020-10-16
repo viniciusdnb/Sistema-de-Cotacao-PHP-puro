@@ -55,7 +55,7 @@
                         <li>
                             <a href="http://<?php echo APP_HOST; ?>">
 
-                                <p>Cadastro de Fornecedores</p>
+                                <p>Unidade de Medida</p>
                             </a>
                         </li>
                         <li>

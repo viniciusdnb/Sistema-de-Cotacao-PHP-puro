@@ -1,7 +1,7 @@
  <div>
      <ol>
          <li>Adm</li>
-         <li>Permissões</li>
+         <li>Fornecedor</li>
          <li><a href="http://<?php echo APP_HOST; ?>/factory/index">Listar</a></li>
          <li><a href="http://<?php echo APP_HOST; ?>/factory/new">Cadastrar</a></li>
      </ol>

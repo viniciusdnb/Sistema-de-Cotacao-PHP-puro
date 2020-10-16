@@ -38,7 +38,7 @@
                                 <button type="submit">Salvar</button>
 
                                 <a href="http://<?php echo APP_HOST; ?>/permission/index">Cancelar</a>
-                                <a href="http://<?php echo APP_HOST; ?>/permisson/delete">Excluir</a>
+                                
                             </div>
                         </form>
                     

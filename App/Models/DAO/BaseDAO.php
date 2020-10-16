@@ -67,6 +67,7 @@
                     $this->connection->beginTransaction();
                     $stmt = $this->connection->prepare("UPDATE $table SET $cols $where");
                     $stmt->execute($values);
+                    
                     $this->connection->commit();    
 
                     return $stmt->rowCount();

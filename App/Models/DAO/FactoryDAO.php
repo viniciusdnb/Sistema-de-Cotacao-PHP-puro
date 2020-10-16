@@ -14,7 +14,7 @@ class FactoryDAO extends BaseDAO
 
             if($result)
             {
-                $dataSetFac = $result->fetch();
+                $dataSetFac = $result->fetchAll();
 
                 foreach($dataSetFac as $value)
                 {
@@ -41,9 +41,10 @@ class FactoryDAO extends BaseDAO
         {
             $result = $this->select("SELECT * FROM factory");
 
+            $dataSetFac = $result->fetchAll();
+
             if($result)
-            {
-                $dataSetFac = $result->fetchAll();
+            {                
                 $findAll = [];
 
                 foreach ($dataSetFac as $value) {
@@ -59,6 +60,7 @@ class FactoryDAO extends BaseDAO
                     $findAll[] = $factory;
                 }
 
+                
                 return $findAll;
             }
             else 
@@ -113,11 +115,13 @@ class FactoryDAO extends BaseDAO
                 $cnpj       = $factory->getCnpjFactory();
                 $phone      = $factory->getPhoneFactory();
                 $contact    = $factory->getContactFactory();
-
-                return $this->update('factory',
-                            ':name_factory, :addres_factory, 
-                            :email_factory, :cnpj_factory,
-                            :phone_factory, :contact_factory',
+                
+                
+                
+                $this->update('factory',
+                            'name_factory = :name_factory, addres_factory = :addres_factory, 
+                            email_factory = :email_factory, cnpj_factory = :cnpj_factory,
+                            phone_factory = :phone_factory, contact_factory = :contact_factory',
                             [
                                 ':id'               => $id,
                                 ':name_factory'     => $name,
@@ -125,14 +129,16 @@ class FactoryDAO extends BaseDAO
                                 ':email_factory'    => $email,
                                 ':cnpj_factory'     => $cnpj,
                                 ':phone_factory'    => $phone,
-                                ':contact_factory'  => $contact
+                                ':contact_factory'  => $contact,
                             ],
-                            'id = :id'
+                            "id = :id"
                 );
+                
 
             } 
             catch (\Exception $ex) 
             {
+               
                 throw new Exception("Erro na atualização " . $ex->getMessage(), 500);
             }
         }
@@ -142,7 +148,7 @@ class FactoryDAO extends BaseDAO
             try {
                 $id = $factory->getId();
 
-                if($this->delete("factory", "WHERE id = '$id'"))
+                if($this->delete('factory', "id = '$id'"))
                 {
                     return TRUE;
                 }

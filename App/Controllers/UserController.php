@@ -36,11 +36,11 @@ class UserController extends Controller
         if(isset($_POST))
         {
             
-            $name = filter_var($_POST['txt_name'], FILTER_SANITIZE_SPECIAL_CHARS);
-            $pass = filter_var($_POST['txt_pass'], FILTER_SANITIZE_SPECIAL_CHARS);
+            $name = strtoupper(filter_var($_POST['txt_name'], FILTER_SANITIZE_SPECIAL_CHARS));
+            $pass = strtoupper(filter_var($_POST['txt_pass'], FILTER_SANITIZE_SPECIAL_CHARS));
             $passHash = password_hash($pass, PASSWORD_DEFAULT);
-            $active = filter_var($_POST['txt_active'], FILTER_SANITIZE_SPECIAL_CHARS);
-            $perm = filter_var($_POST['txt_perm'], FILTER_SANITIZE_SPECIAL_CHARS);
+            $active = strtoupper(filter_var($_POST['txt_active'], FILTER_SANITIZE_SPECIAL_CHARS));
+            $perm = strtoupper(filter_var($_POST['txt_perm'], FILTER_SANITIZE_SPECIAL_CHARS));
 
             $user = new User();
             $user->setName($name);
@@ -85,10 +85,10 @@ class UserController extends Controller
        {  
             
 
-            $name = filter_var($_POST['txt_name'], FILTER_SANITIZE_SPECIAL_CHARS);
-            $id = filter_var($_POST['id'], FILTER_SANITIZE_SPECIAL_CHARS);           
-            $active = filter_var($_POST['txt_active'], FILTER_SANITIZE_SPECIAL_CHARS);
-            $perm = filter_var($_POST['txt_perm'], FILTER_SANITIZE_SPECIAL_CHARS);
+            $name = strtoupper(filter_var($_POST['txt_name'], FILTER_SANITIZE_SPECIAL_CHARS));
+            $id = strtoupper(filter_var($_POST['id'], FILTER_SANITIZE_SPECIAL_CHARS));           
+            $active = strtoupper(filter_var($_POST['txt_active'], FILTER_SANITIZE_SPECIAL_CHARS));
+            $perm = strtoupper(filter_var($_POST['txt_perm'], FILTER_SANITIZE_SPECIAL_CHARS));
 
             $user = new User();
             $user->setId($id);

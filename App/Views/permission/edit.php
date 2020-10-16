@@ -7,7 +7,7 @@
     </ol>
 </div>
 <?php 
-   
+   var_dump($viewVar);
     
 ?>
 

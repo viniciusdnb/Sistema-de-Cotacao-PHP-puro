@@ -28,10 +28,10 @@ class PermissionController extends Controller
         {
             if($_POST)
             {
-                $codType = filter_var($_POST['txt_cod_type'], FILTER_SANITIZE_SPECIAL_CHARS);
-                $nameType = filter_var($_POST['txt_name_perm'], FILTER_SANITIZE_SPECIAL_CHARS);
-                $codPerm = filter_var($_POST['txt_cod_perm'], FILTER_SANITIZE_SPECIAL_CHARS);
-                $namePerm = filter_var($_POST['txt_name_perm'], FILTER_SANITIZE_SPECIAL_CHARS);
+                $codType = strtoupper(filter_var($_POST['txt_cod_type'], FILTER_SANITIZE_SPECIAL_CHARS));
+                $nameType = strtoupper(filter_var($_POST['txt_name_perm'], FILTER_SANITIZE_SPECIAL_CHARS));
+                $codPerm = strtoupper(filter_var($_POST['txt_cod_perm'], FILTER_SANITIZE_SPECIAL_CHARS));
+                $namePerm = strtoupper(filter_var($_POST['txt_name_perm'], FILTER_SANITIZE_SPECIAL_CHARS));
 
                 $perm = new Permission();
                 $perm->setType($codType);
@@ -69,10 +69,10 @@ class PermissionController extends Controller
         if ($_POST) {
 
             $id = filter_var($_POST['id'], FILTER_SANITIZE_SPECIAL_CHARS);
-            $codType = filter_var($_POST['txt_cod_type'], FILTER_SANITIZE_SPECIAL_CHARS);
-            $nameType = filter_var($_POST['txt_name_perm'], FILTER_SANITIZE_SPECIAL_CHARS);
-            $codPerm = filter_var($_POST['txt_cod_perm'], FILTER_SANITIZE_SPECIAL_CHARS);
-            $namePerm = filter_var($_POST['txt_name_perm'], FILTER_SANITIZE_SPECIAL_CHARS);
+            $codType = strtoupper(filter_var($_POST['txt_cod_type'], FILTER_SANITIZE_SPECIAL_CHARS));
+            $nameType = strtoupper(filter_var($_POST['txt_name_perm'], FILTER_SANITIZE_SPECIAL_CHARS));
+            $codPerm = strtoupper(filter_var($_POST['txt_cod_perm'], FILTER_SANITIZE_SPECIAL_CHARS));
+            $namePerm = strtoupper(filter_var($_POST['txt_name_perm'], FILTER_SANITIZE_SPECIAL_CHARS));
 
             $perm = new Permission();
             $perm->setId($id);
