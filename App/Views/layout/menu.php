@@ -53,7 +53,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="http://<?php echo APP_HOST; ?>">
+                            <a href="http://<?php echo APP_HOST; ?>/und/index">
 
                                 <p>Unidade de Medida</p>
                             </a>
