@@ -41,12 +41,15 @@ class UserController extends Controller
             $passHash = password_hash($pass, PASSWORD_DEFAULT);
             $active = strtoupper(filter_var($_POST['txt_active'], FILTER_SANITIZE_SPECIAL_CHARS));
             $perm = strtoupper(filter_var($_POST['txt_perm'], FILTER_SANITIZE_SPECIAL_CHARS));
+            $email = strtoupper((filter_var($_POST['txt_email'], FILTER_SANITIZE_SPECIAL_CHARS)));
+           
 
             $user = new User();
             $user->setName($name);
             $user->setPass($passHash);
             $user->setActive($active);
             $user->setIdPerm($perm);
+            $user->setEmail($email);
 
             $userDAO = new UserDAO();
             $userDAO->insertUser($user);
@@ -89,12 +92,15 @@ class UserController extends Controller
             $id = strtoupper(filter_var($_POST['id'], FILTER_SANITIZE_SPECIAL_CHARS));           
             $active = strtoupper(filter_var($_POST['txt_active'], FILTER_SANITIZE_SPECIAL_CHARS));
             $perm = strtoupper(filter_var($_POST['txt_perm'], FILTER_SANITIZE_SPECIAL_CHARS));
+            $email = strtoupper((filter_var($_POST['txt_email'], FILTER_SANITIZE_SPECIAL_CHARS)));
 
             $user = new User();
             $user->setId($id);
             $user->setName($name);            
             $user->setActive($active);
             $user->setIdPerm($perm);
+            $user->setEmail($email);
+            
 
             $userDAO = new UserDAO();
             $userDAO->updateUser($user);

@@ -35,7 +35,7 @@
                     </a>
                     <ul>
                         <li>
-                            <a href="http://<?php echo APP_HOST; ?>/User/index">
+                            <a href="https://<?php echo APP_HOST; ?>/User/index">
 
                                 <p>Cadastro de Usuario</p>
                             </a>

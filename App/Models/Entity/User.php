@@ -13,6 +13,7 @@
         private $typeNamePerm;
         private $perm;
         private $permName;
+        private $email;
 
         
 
@@ -62,6 +63,11 @@
             $this->permName = $permName;
         }
 
+        public function setEmail($email)
+        {
+            $this->email = $email;
+        }
+
         public function getId()
         {
             return $this->id;
@@ -105,5 +111,10 @@
         public function getPermName()
         {
             return $this->permName;
+        }
+
+        public function getEmail()
+        {
+            return $this->email;
         }
     }

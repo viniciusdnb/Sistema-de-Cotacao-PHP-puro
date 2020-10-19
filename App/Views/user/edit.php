@@ -49,20 +49,39 @@
 
                     use App\Libs\FunctionPublic;
 
+                    $nameObj =
+                        [
+                            0 => 'findAllPerm',
+                            1 => 'findIdUser'
+                        ];
+
+                    $action =
+                        [
+                            0 => 'getId',
+                            1 => 'getIdPerm'
+                        ];
+
+                    $cbx = new FunctionPublic($viewVar, $nameObj, $action);
+
+
 
                     foreach ($viewVar['findAllPerm'] as $value) {
                         echo '<option value="' . $value->getId() . '"';
 
-                        if ($value->getId() == FunctionPublic::cbxPerm($viewVar)) {
+                        if ($value->getId() == $cbx->cbxSelect()) {
                             echo ' selected="selected"';
                         }
-
                         echo '>' . $value->getType() . '. ' . $value->getTypeName() . ' - ' . $value->getPerm() . '. ' . $value->getPermName() . '</option>';
                     }
 
                     ?>
 
                 </select>
+            </div>
+
+            <div>
+                <label>Email:</label>
+                <input type="email" name="txt_email" value="<?php echo $viewVar['findIdUser']->getEmail(); ?>">
             </div>
 
             <input type="hidden" name="id" value="<?php echo $viewVar['findIdUser']->getId(); ?>" </div> <div>

@@ -10,7 +10,7 @@
         //funcao que busca por id
         public  function findId($id)
         {
-            $result = $this->select("SELECT user.id, user.name, user.pass, user.active, user.id_perm,
+            $result = $this->select("SELECT user.id, user.name, user.pass, user.active, user.id_perm, user.email,
                         permission.type, permission.type_name, permission.perm, permission.perm_name
                         FROM user
                         INNER JOIN permission
@@ -31,6 +31,7 @@
                 $user->setTypeNamePerm($dateSetUser['type_name']);
                 $user->setPerm($dateSetUser['perm']);
                 $user->setPermName($dateSetUser['perm_name']);
+                $user->setEmail($dateSetUser['email']);
 
                 return $user;
             }else{
@@ -42,7 +43,7 @@
         //funcao que busca todos e retorna um array de objetos
         public function findAll()
         {
-            $result = $this->select("SELECT user.id, user.name, user.pass, user.active, user.id_perm,
+            $result = $this->select("SELECT user.id, user.name, user.pass, user.active, user.id_perm, user.email,
                             permission.type, permission.type_name, permission.perm, permission.perm_name
                             FROM user
                             INNER JOIN permission
@@ -66,6 +67,7 @@
                     $user->setTypeNamePerm($dateSetUser['type_name']);
                     $user->setPerm($dateSetUser['perm']);
                     $user->setPermName($dateSetUser['perm_name']);
+                    $user->setEmail($dateSetUser['email']);
                     $findAll[] = $user;
                 }
                 
@@ -89,13 +91,15 @@
                 $pass   = $user->getPass();
                 $active = $user->getActive();
                 $idPerm = $user->getIdPerm();
+                $email  = $user->getEmail();
                 
-                return $this->insert('user', ':name, :pass, :active, :id_Perm', 
+                return $this->insert('user', ':name, :pass, :active, :id_Perm, :email', 
                     [
-                       ':name'      => $name,
-                       ':pass'      => $pass,
-                       ':active'    => $active,
-                       ':id_Perm'    => $idPerm,
+                       ':name'          => $name,
+                       ':pass'          => $pass,
+                       ':active'        => $active,
+                       ':id_Perm'       => $idPerm,
+                       ':email'         => $email
                     ]
                 );                
                 
@@ -114,13 +118,15 @@
                 $name   = $user->getName();                
                 $active = $user->getActive();
                 $idperm = $user->getIdPerm();
+                $email  = $user->getEmail();
                 
-                return $this->update('user', 'name = :name, active = :active, id_perm = :id_perm',
+                return $this->update('user', 'name = :name, active = :active, id_perm = :id_perm, email = :email',
                     [
-                        ':id'       => $id,
-                        ':name'     => $name,                        
-                        ':active'   => $active,
-                        ':id_perm'  => $idperm,
+                        ':id'           => $id,
+                        ':name'         => $name,                        
+                        ':active'       => $active,
+                        ':id_perm'      => $idperm,
+                        ':email'        => $email
                     ],
                     "id = :id"
                 );

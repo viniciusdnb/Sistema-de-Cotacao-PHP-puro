@@ -4,15 +4,17 @@
 
     class FunctionPublic
     {
-        private $nameObj = [];
-        private $action = [];
+        private $nameObj;
+        private $action;
         private $viewVar;
 
-        public function __construct($viewVar, array $nameObj,array $action)
+        public function __construct($viewVar, array $nameObj, array $action)
         {
-            $this->nameObj[] = $nameObj;
-            $this->action[] = $action;
+            $this->nameObj = $nameObj;
+            
+            $this->action = $action;
             $this->viewVar = $viewVar;
+        
         }
 
         public function cbxSelect()
@@ -20,13 +22,25 @@
             $q = count($this->viewVar[$this->nameObj[0]]);
             $a = 0;
 
-            while ($a < $q) 
+            
+            foreach ($this->viewVar[$this->nameObj[0]] as $value) {
+                    $valor0[] = $value->{$this->action[0]}();                    
+            }
+
+            $valor = $this->viewVar[$this->nameObj[1]]->{$this->action[1]}(); 
+            
+            while($a < $q)
             {
-                if($this->viewVar[$this->nameObj[1]]->{$this->action[1]}() == $this->viewVar[$this->nameObj[0]]->{$this->action}() )
+                
+                if($valor == $valor0[$a])
                 {
                     return $this->viewVar[$this->nameObj[1]]->{$this->action[1]}();
                 }
-            }
+                
+                $a++;
+            }        
+
+            
         }
 
 
