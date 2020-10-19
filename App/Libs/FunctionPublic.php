@@ -22,9 +22,9 @@
 
             while ($a < $q) 
             {
-                if($this->viewVar[$this->nameObj[1]]->{$this->action[1]} == $this->viewVar[$this->nameObj[0]]->{$this->action} )
+                if($this->viewVar[$this->nameObj[1]]->{$this->action[1]}() == $this->viewVar[$this->nameObj[0]]->{$this->action}() )
                 {
-                    return $this->viewVar[$this->nameObj[1]]->{$this->action[1]};
+                    return $this->viewVar[$this->nameObj[1]]->{$this->action[1]}();
                 }
             }
         }
