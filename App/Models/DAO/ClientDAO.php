@@ -142,7 +142,7 @@
                 $contact        = $client->getContactClient();
                 $idAgent        = $client->getIdAgent();
 
-                return $this->insert('client','name_client = :name_client, addres_client = :addres_client,
+                return $this->update('client','name_client = :name_client, addres_client = :addres_client,
                                                 email_client = :email_client, cnpj_client = :cnpj_client, 
                                                 phone_client = :phone_client, contact_client = :contact_client, 
                                                 id_agent = :id_agent',

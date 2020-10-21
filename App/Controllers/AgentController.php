@@ -105,7 +105,7 @@
             else
             {
                 Session::unsetErro();
-                Session::setErro('Não foi possivel Cadastrar, verifique os dados e tente novamente');
+                Session::setErro('Não foi possivel atualizar, verifique os dados e tente novamente');
                 $this->redirect('/agent/index');    
             }
         }
