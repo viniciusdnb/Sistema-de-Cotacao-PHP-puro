@@ -9,7 +9,7 @@
         private $message;
         private $code;
 
-        public function __construct($objException = Exception::class)
+        public function __construct(Exception $objException)
         {
             $this->code = $objException->getCode();
             $this->message = $objException->getMessage();

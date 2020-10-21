@@ -59,9 +59,15 @@
                             </a>
                         </li>
                         <li>
-                            <a href="http://<?php echo APP_HOST; ?>">
+                            <a href="http://<?php echo APP_HOST; ?>/agent/index">
 
                                 <p>Cadastro de Vendedores</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="http://<?php echo APP_HOST; ?>">
+
+                                <p>Cadastro de Clientes</p>
                             </a>
                         </li>
                         <li>
@@ -91,10 +97,10 @@
             <ul>
                 <li>
                     <a href="#">
-                       
+
                         <p>
                             Comercial
-                           
+
                         </p>
                     </a>
                     <ul>
@@ -102,8 +108,8 @@
                     </ul>
                 </li>
             </ul>
-            
-            
+
+
         </nav>
 
     </div>

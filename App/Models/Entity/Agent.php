@@ -6,8 +6,8 @@
     {
         private $id;
         private $nameAgent;
-        private $emailAgente;
-        private $phoneAgente;
+        private $emailAgent;
+        private $phoneAgent;
 
         public function setId($id)
         {
@@ -17,13 +17,13 @@
         {
             $this->nameAgent = $nameAgent;
         }
-        public function setEmailAgente($emailAgente)
+        public function setEmailAgent($emailAgent)
         {
-            $this->emailAgente = $emailAgente;
+            $this->emailAgent = $emailAgent;
         }
-        public function setPhoneAgente($phoneAgente)
+        public function setPhoneAgent($phoneAgent)
         {
-            $this->phoneAgente = $phoneAgente;
+            $this->phoneAgent = $phoneAgent;
         }
         public function getId()
         {
@@ -33,13 +33,13 @@
         {
             return $this->nameAgent;
         }
-         public function getEmailAgente()
+         public function getEmailAgent()
         {
-            return $this->emailAgente;
+            return $this->emailAgent;
         }
-         public function getPhoneAgente()
+         public function getPhoneAgent()
         {
-            return $this->phoneAgente;
+            return $this->phoneAgent;
         }
     }
 
