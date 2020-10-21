@@ -16,9 +16,9 @@
                                             client.email_client,
                                             client.cnpj_client,
                                             client.phone_client,
-                                            clinet.contact_client,
+                                            client.contact_client,
                                             client.id_agent,
-                                            agent.name_agent,
+                                            agent.name_agent
                                     FROM client
                                     INNER JOIN agent
                                     ON client.id_agent = agent.id
@@ -33,6 +33,7 @@
                 $client->setNameClient($dataSetClient['name_client']);
                 $client->setAddresClient($dataSetClient['addres_client']);
                 $client->setEmailClient($dataSetClient['email_client']);
+                $client->setCnpjClient($dataSetClient['cnpj_client']);
                 $client->setPhoneClient($dataSetClient['phone_client']);
                 $client->setContactClient($dataSetClient['contact_client']);
                 $client->setIdAgent($dataSetClient['id_agent']);
@@ -54,9 +55,9 @@
                                                 client.email_client,
                                                 client.cnpj_client,
                                                 client.phone_client,
-                                                clinet.contact_client,
+                                                client.contact_client,
                                                 client.id_agent,
-                                                agent.name_agent,
+                                                agent.name_agent
                                         FROM client
                                         INNER JOIN agent
                                         ON client.id_agent = agent.id");
@@ -74,6 +75,7 @@
                     $client->setNameClient($value['name_client']);
                     $client->setAddresClient($value['addres_client']);
                     $client->setEmailClient($value['email_client']);
+                    $client->setCnpjClient($value['cnpj_client']);
                     $client->setPhoneClient($value['phone_client']);
                     $client->setContactClient($value['contact_client']);
                     $client->setIdAgent($value['id_agent']);

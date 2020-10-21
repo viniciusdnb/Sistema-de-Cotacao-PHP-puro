@@ -65,7 +65,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="http://<?php echo APP_HOST; ?>">
+                            <a href="http://<?php echo APP_HOST; ?>/client/index">
 
                                 <p>Cadastro de Clientes</p>
                             </a>
