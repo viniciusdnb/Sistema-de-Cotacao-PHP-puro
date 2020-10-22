@@ -71,7 +71,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="http://<?php echo APP_HOST; ?>">
+                            <a href="http://<?php echo APP_HOST; ?>/product/index">
 
                                 <p>Cadastro de Produtos</p>
                             </a>

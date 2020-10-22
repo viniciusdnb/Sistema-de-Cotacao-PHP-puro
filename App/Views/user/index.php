@@ -52,8 +52,8 @@ if ($Session::getErro() !== "") {
                     echo "<td><a href=http://" . APP_HOST . "/user/edit/" . $value->getId() . ">" . $value->getName() . "</a></td>";
                     echo "<td><a href=http://" . APP_HOST . "/user/edit/" . $value->getId() . ">" . $value->getActive() . "</a></td>";
                     echo "<td><a href=http://" . APP_HOST . "/user/edit/" . $value->getId() . ">" . $value->getTypeNamePerm() . "</a></td>";
-                    echo "<td><a href=http://" . APP_HOST . "/user/edit/" . $value->getId() . ">" . $value->getPermName() . "</td>";
-                    echo "<td><a href=http://" . APP_HOST . "/user/edit/" . $value->getId() . ">" . $value->getEmail() . "</td>";
+                    echo "<td><a href=http://" . APP_HOST . "/user/edit/" . $value->getId() . ">" . $value->getPermName() . "</a></td>";
+                    echo "<td><a href=http://" . APP_HOST . "/user/edit/" . $value->getId() . ">" . $value->getEmail() . "</a></td>";
                     echo "</tr>";
                 }
 

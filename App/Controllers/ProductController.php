@@ -14,12 +14,20 @@
     {
         public function index()
         {
-
+            $product = new ProductDAO();
+            $this->setViewParam('product', $product->findAll());
+            $this->render('/product/index');
         }
 
         public function new()
         {
+            $und = new UndDAO();
+            $this->setViewParam('und', $und->findAll());
+            
+            $factory = new FactoryDAO();
+            $this->setViewParam('factory', $factory->findAll());
 
+            $this->render('/product/insert');
         }
 
         public function edit($params)
@@ -29,7 +37,10 @@
 
         public function insert()
         {
-
+            if($_POST)
+            {
+                $code = filter_var($_POST['txt_code'], FILTER_SANITIZE_SPECIAL_CHARS);
+            }
         }
         
         public function update()
