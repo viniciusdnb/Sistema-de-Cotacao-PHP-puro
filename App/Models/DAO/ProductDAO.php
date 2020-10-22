@@ -139,6 +139,7 @@
         {
             try 
             {
+                var_dump($product);
                 $id                 = $product->getId();
                 $codeProd           = $product->getCodProd();
                 $descProd           = $product->getDescProd();
@@ -149,9 +150,9 @@
                 $controlledProd     = $product->getControlledProd();
                 $descCompleteProd   = $product->getDescCompleteProd();
 
-                return $this->insert('product', 'code_prod = :code_prod, desc_prod = :desc_prod, id_und = :id_und, 
+                return $this->update('product', 'code_prod = :code_prod, desc_prod = :desc_prod, id_und = :id_und, 
                                                 id_factory = :id_factory, active_prod = :active_prod, medicament_prod = :medicament_prod, 
-                                                controlled_prod =:controlled_prod, desc_complete_prod = :desc_complete_prod',
+                                                controlled_prod = :controlled_prod, desc_complete_prod = :desc_complete_prod',
                                                 [
                                                     ':id'                   => $id,
                                                     ':code_prod'            => $codeProd,

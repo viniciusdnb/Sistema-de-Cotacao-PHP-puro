@@ -39,17 +39,17 @@
         </div>
         <div>
             <label>Ativo:</label>
-            <select>
+            <select name="txt_active">
                 <option value="1">Sim</option>
                 <option value="0">Não</option>
             </select>
             <label>Medicamento:</label>
-            <select>
+            <select name="txt_medicament">
                 <option value="0">Não</option>
                 <option value="1">Sim</option>
             </select>
             <label>Controlado:</label>
-            <select>
+            <select name="txt_controlled">
                 <option value="0">Não</option>
                 <option value="1">Sim</option>
             </select>
