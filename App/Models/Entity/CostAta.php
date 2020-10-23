@@ -20,9 +20,13 @@
         private $bula;
         private $catalog;
         private $cbpf;
-        private $acreditation;
+        private $accreditation;
         private $registerAnvisa;
         private $registerDou;
+        private $idAgent;
+        private $nameAgent;
+
+        
       
         
         function getId() {
@@ -85,8 +89,8 @@
         return $this->cbpf;
         }
 
-        function getAcreditation() {
-        return $this->acreditation;
+        function getAccreditation() {
+        return $this->accreditation;
         }
 
         function getRegisterAnvisa() {
@@ -95,6 +99,14 @@
 
         function getRegisterDou() {
         return $this->registerDou;
+        }
+
+        function getIdAgent() {
+            return $this->idAgent;
+        }
+
+        function getNameAgent() {
+            return $this->nameAgent;
         }
 
         function setId($id) {
@@ -149,8 +161,8 @@
         $this->cbpf = $cbpf;
         }
 
-        function setAcreditation($acreditation) {
-        $this->acreditation = $acreditation;
+        function setAccreditation($accreditation) {
+        $this->accreditation = $accreditation;
         }
 
         function setRegisterAnvisa($registerAnvisa) {
@@ -161,5 +173,13 @@
         $this->registerDou = $registerDou;
         }
 
+        function setIdAgent($idAgent){
+            $this->idAgent = $idAgent;
+        }
 
+        function setNameAgent($nameAgent)
+        {
+            $this->nameAgent = $nameAgent;
+            
+        }
   }

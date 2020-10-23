@@ -26,10 +26,12 @@
                                             cost_Ata.accreditation,
                                             cost_Ata.register_anvisa,
                                             cost_Ata.register_dou,
-                                            client.name_client
+                                            cost_ata.id_agent,
+                                            client.name_client,                                            
+                                            agent.name_agent
                                         FROM cost_Ata
-                                        INNER JOIN client
-                                        ON cost_Ata.id = client.id
+                                        INNER JOIN client ON cost_Ata.id_client = client.id
+                                        INNER JOIN agent ON cost_ata.id_agent = agent.id 
                                         WHERE cost_Ata.id = '$id'");
             
             $dataSetCostAta = $result->fetch();
@@ -50,10 +52,12 @@
                 $costAta->setBula($dataSetCostAta['bula']);
                 $costAta->setCatalog($dataSetCostAta['catalog']);
                 $costAta->setCbpf($dataSetCostAta['cbpf']);
-                $costAta->setAcreditation($dataSetCostAta['accreditation']);
+                $costAta->setAccreditation($dataSetCostAta['accreditation']);
                 $costAta->setRegisterAnvisa($dataSetCostAta['register_anvisa']);
                 $costAta->setRegisterDou($dataSetCostAta['register_dou']);
                 $costAta->setNameClient($dataSetCostAta['name_client']);
+                $costAta->setIdAgent($dataSetCostAta['id_agent']);
+                $costAta->setNameAgent($dataSetCostAta['name_agent']);
                 
                 return $costAta;
 
@@ -82,10 +86,12 @@
                                                 cost_Ata.accreditation,
                                                 cost_Ata.register_anvisa,
                                                 cost_Ata.register_dou,
-                                                client.name_client
+                                                cost_ata.id_agent,
+                                                client.name_client,                                            
+                                                agent.name_agent
                                             FROM cost_Ata
-                                            INNER JOIN client
-                                            ON cost_Ata.id = client.id");
+                                            INNER JOIN client ON cost_Ata.id_client = client.id
+                                            INNER JOIN agent ON cost_ata.id_agent = agent.id ");
 
             $dataSetCostAta = $result->fetchAll();
 
@@ -109,10 +115,12 @@
                     $costAta->setBula($value['bula']);
                     $costAta->setCatalog($value['catalog']);
                     $costAta->setCbpf($value['cbpf']);
-                    $costAta->setAcreditation($value['accreditation']);
+                    $costAta->setAccreditation($value['accreditation']);
                     $costAta->setRegisterAnvisa($value['register_anvisa']);
                     $costAta->setRegisterDou($value['register_dou']);
                     $costAta->setNameClient($value['name_client']);
+                    $costAta->setIdAgent($dataSetCostAta['id_agent']);
+                    $costAta->setNameAgent($dataSetCostAta['name_agent']);
 
                     $findAll[] = $costAta;
                 }
@@ -130,21 +138,130 @@
         {
             try 
             {
-                $idClient = $costAta->getIdClient();
                 
+                $idClient       = $costAta->getIdClient();
+                $date           = $costAta->getDate();
+                $pr             = $costAta->getPr();
+                $process        = $costAta->getProcess();
+                $object         = $costAta->getObject();
+                $inDay          = $costAta->getInDay();
+                $winner         = $costAta->getWinner();
+                $daysDeliver    = $costAta->getDaysDeliver();
+                $example        = $costAta->getExample();
+                $bula           = $costAta->getBula();
+                $catalog        = $costAta->getCatalog();
+                $cbpf           = $costAta->getCbpf();
+                $accreditation  = $costAta->getAccreditation();
+                $registerAnvisa = $costAta->getRegisterAnvisa();
+                $registerDou    = $costAta->getRegisterDou();                
+                $idAgent        = $costAta->getIdAgent();
+
+                return $this->insert('cost_ata', ':id_client, :date, :pr, :process,
+                                                :object, :in_day, :winner, :days_deliver,
+                                                :example, :bual, :catalog, :cbpf, :accreditation, 
+                                                :register_anvisa, :register_dou, :id_agent',
+                                                [
+                                                    ':id_client'        => $idClient,
+                                                    ':date'             => $date,
+                                                    ':pr'               => $pr,
+                                                    ':process'          => $process,
+                                                    ':object'           => $object,
+                                                    ':in_day'           => $inDay,
+                                                    ':winner'           => $winner,
+                                                    ':days_deliver'     => $daysDeliver,
+                                                    ':example'          => $example,
+                                                    ':bual'             => $bula,
+                                                    ':catalog'          => $catalog,
+                                                    ':cbpf'             => $cbpf,
+                                                    ':accreditation'    => $accreditation,
+                                                    ':register_anvisa'  => $registerAnvisa,
+                                                    ':register_dou'     => $registerDou,
+                                                    ':id_agent'         => $idAgent
+                                                ]
+                                     );
             } 
             catch (\Exception $ex) 
             {
+               throw new Exception("Erro ao cadastrar " . $ex->getMessage(), 500);
                
             }
         }
         public function updateCostAta(CostAta $costAta)
         {
-        
+            try {
+
+                $id             = $costAta->getId();
+                $idClient       = $costAta->getIdClient();
+                $date           = $costAta->getDate();
+                $pr             = $costAta->getPr();
+                $process        = $costAta->getProcess();
+                $object         = $costAta->getObject();
+                $inDay          = $costAta->getInDay();
+                $winner         = $costAta->getWinner();
+                $daysDeliver    = $costAta->getDaysDeliver();
+                $example        = $costAta->getExample();
+                $bula           = $costAta->getBula();
+                $catalog        = $costAta->getCatalog();
+                $cbpf           = $costAta->getCbpf();
+                $accreditation  = $costAta->getAccreditation();
+                $registerAnvisa = $costAta->getRegisterAnvisa();
+                $registerDou    = $costAta->getRegisterDou();
+                $idAgent        = $costAta->getIdAgent();
+
+                return $this->update('cost_ata', 'id_client = :id_client, date = :date, pr = :pr, 
+                                                    process = :process, object = :object, in_day = :in_day, 
+                                                    winner = :winner, days_deliver = :days_deliver,
+                                                    example = :example, bual = :bual, catalog = :catalog, 
+                                                    cbpf = :cbpf, accreditation = :accreditation, 
+                                                    register_anvisa = :register_anvisa, register_dou = :register_dou,
+                                                    id_agent = :id_agent',
+                                                [
+                                                    ':id'               => $id,
+                                                    ':id_client'        => $idClient,
+                                                    ':date'             => $date,
+                                                    ':pr'               => $pr,
+                                                    ':process'          => $process,
+                                                    ':object'           => $object,
+                                                    ':in_day'           => $inDay,
+                                                    ':winner'           => $winner,
+                                                    ':days_deliver'     => $daysDeliver,
+                                                    ':example'          => $example,
+                                                    ':bual'             => $bula,
+                                                    ':catalog'          => $catalog,
+                                                    ':cbpf'             => $cbpf,
+                                                    ':accreditation'    => $accreditation,
+                                                    ':register_anvisa'  => $registerAnvisa,
+                                                    ':register_dou'     => $registerDou,
+                                                    ':id_agent'         => $idAgent
+                                                ],
+
+                                                "id = :id"
+                                     );
+
+            } catch (\Exception $ex) 
+            {
+                throw new Exception("Erro ao atualizar " . $ex->getMessage(), 500);
+            }
         }
         public function deleteCostAta(CostAta $costAta)
         {
-        
+            try
+            {
+                $id = $costAta->getId();
+
+                if($this->delete('cost_ata', "id = '$id'"))
+                {
+                    return TRUE;
+                }
+                else 
+                {
+                    return FALSE;    
+                }
+            }
+            catch (\Exception $ex)
+            {
+                throw new Exception("Erro na Excluir " . $ex->getMessage(), 500);
+            }
         }
     }
 
