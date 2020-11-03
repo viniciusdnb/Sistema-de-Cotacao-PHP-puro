@@ -8,6 +8,7 @@
     abstract class BaseDAO
     {
         private $connection;
+        private $lastId;
 
         public function __construct()
         {
@@ -38,8 +39,9 @@
                     $stmt = $this->connection->prepare("INSERT INTO $table ($cols) VALUES ($parameters)");
                     $stmt->execute($values);
                     $this->connection->commit();
-
+                    
                     return $stmt->rowCount();
+                    
                 } 
                 catch (PDOException $ex) 
                 {
@@ -51,6 +53,16 @@
             {
                 return FALSE;    
             }
+        }
+
+        public function setLastId($lastId)
+        {
+            return $this->lastId = $lastId;
+        }
+
+        public function getLastId()
+        {
+            return $this->lastId;
         }
 
         public function update($table, $cols, $values, $where = NULL)

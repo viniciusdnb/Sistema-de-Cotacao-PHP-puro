@@ -58,6 +58,7 @@
                 $costAta->setNameClient($dataSetCostAta['name_client']);
                 $costAta->setIdAgent($dataSetCostAta['id_agent']);
                 $costAta->setNameAgent($dataSetCostAta['name_agent']);
+                $costAta->setIdAgent(1);
                 
                 return $costAta;
 
@@ -156,9 +157,9 @@
                 $registerDou    = $costAta->getRegisterDou();                
                 $idAgent        = $costAta->getIdAgent();
 
-                return $this->insert('cost_ata', ':id_client, :date, :pr, :process,
+                $result =  $this->insert('cost_ata', ':id_client, :date, :pr, :process,
                                                 :object, :in_day, :winner, :days_deliver,
-                                                :example, :bual, :catalog, :cbpf, :accreditation, 
+                                                :example, :bula, :catalog, :cbpf, :accreditation, 
                                                 :register_anvisa, :register_dou, :id_agent',
                                                 [
                                                     ':id_client'        => $idClient,
@@ -170,7 +171,7 @@
                                                     ':winner'           => $winner,
                                                     ':days_deliver'     => $daysDeliver,
                                                     ':example'          => $example,
-                                                    ':bual'             => $bula,
+                                                    ':bula'             => $bula,
                                                     ':catalog'          => $catalog,
                                                     ':cbpf'             => $cbpf,
                                                     ':accreditation'    => $accreditation,
@@ -179,6 +180,11 @@
                                                     ':id_agent'         => $idAgent
                                                 ]
                                      );
+                $lastId = $this->select("SELECT id FROM cost_ata ORDER BY id DESC LIMIT 1 ");
+                $last = $lastId->fetchColumn();
+
+                return ['result' => $result, 'lastId' => $last];
+                
             } 
             catch (\Exception $ex) 
             {
@@ -211,7 +217,7 @@
                 return $this->update('cost_ata', 'id_client = :id_client, date = :date, pr = :pr, 
                                                     process = :process, object = :object, in_day = :in_day, 
                                                     winner = :winner, days_deliver = :days_deliver,
-                                                    example = :example, bual = :bual, catalog = :catalog, 
+                                                    example = :example, bula = :bula, catalog = :catalog, 
                                                     cbpf = :cbpf, accreditation = :accreditation, 
                                                     register_anvisa = :register_anvisa, register_dou = :register_dou,
                                                     id_agent = :id_agent',
@@ -226,7 +232,7 @@
                                                     ':winner'           => $winner,
                                                     ':days_deliver'     => $daysDeliver,
                                                     ':example'          => $example,
-                                                    ':bual'             => $bula,
+                                                    ':bula'             => $bula,
                                                     ':catalog'          => $catalog,
                                                     ':cbpf'             => $cbpf,
                                                     ':accreditation'    => $accreditation,

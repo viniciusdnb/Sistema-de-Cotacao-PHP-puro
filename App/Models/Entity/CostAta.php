@@ -46,7 +46,7 @@
         }
 
         function getDate() {
-        return new DateTime($this->date);
+        return $this->date;
         }
 
         function getPr() {
