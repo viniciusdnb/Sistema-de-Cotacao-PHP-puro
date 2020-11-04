@@ -14,7 +14,7 @@
                                             cost_Ata.id_Client,
                                             cost_Ata.date,
                                             cost_Ata.pr,
-                                            cost_Ata.process
+                                            cost_Ata.process,
                                             cost_Ata.object,
                                             cost_Ata.in_day,
                                             cost_Ata.winner,
@@ -27,15 +27,19 @@
                                             cost_Ata.register_anvisa,
                                             cost_Ata.register_dou,
                                             cost_ata.id_agent,
-                                            client.name_client,                                            
-                                            agent.name_agent
+                                            client.name_client                                           
+                                            
                                         FROM cost_Ata
                                         INNER JOIN client ON cost_Ata.id_client = client.id
-                                        INNER JOIN agent ON cost_ata.id_agent = agent.id 
+                                        
                                         WHERE cost_Ata.id = '$id'");
+
+                                        /*
+                                        agent.name_agent
+                                        INNER JOIN agent ON cost_ata.id_agent = agent.id */
             
             $dataSetCostAta = $result->fetch();
-
+            
             if($dataSetCostAta)
             {
                 $costAta = new CostAta();

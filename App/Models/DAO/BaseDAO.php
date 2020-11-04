@@ -38,8 +38,9 @@
                     $this->connection->beginTransaction();
                     $stmt = $this->connection->prepare("INSERT INTO $table ($cols) VALUES ($parameters)");
                     $stmt->execute($values);
+                    $this->lastId = $this->connection->lastInsertId();
                     $this->connection->commit();
-                    
+                   
                     return $stmt->rowCount();
                     
                 } 

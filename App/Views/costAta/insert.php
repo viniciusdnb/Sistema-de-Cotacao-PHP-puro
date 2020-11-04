@@ -74,7 +74,7 @@
                 <option value="0">Não</option>
                 <option value="1">Sim</option>
             </select>
-            <label>credenciametp</label>
+            <label>credenciameto</label>
             <select name="txt_accreditation">
                 <option value="0">Não</option>
                 <option value="1">Sim</option>

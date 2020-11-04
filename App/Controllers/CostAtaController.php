@@ -6,6 +6,9 @@ use App\Libs\Session;
 use App\Models\DAO\AgentDAO;
 use App\Models\DAO\ClientDAO;
 use App\Models\DAO\CostAtaDAO;
+use App\Models\DAO\FactoryDAO;
+use App\Models\DAO\ProductDAO;
+use App\Models\DAO\UndDAO;
 use App\Models\Entity\CostAta;
 use DateTime;
 
@@ -73,12 +76,37 @@ class CostAtaController extends Controller
                 $costAta->setRegisterAnvisa($registerAnvisa);
                 $costAta->setRegisterDou($registerDou);
                 
-               $costAtaDAO = new CostAtaDAO();
-               if($costAtaDAO->inserCostAta($costAta))
-               {
-                   Session::unsetMessage();
-                   Session::setMessage('Cadastrado com sucesso!');
-                   $this->redirect('/costAta/index');
+                $costAtaDAO = new CostAtaDAO();
+                $lasId = $costAtaDAO->getLastId();
+                Session::unsetLastId();
+                Session::setLastId($lasId);
+
+
+                $this->setViewParam('headerCostAta', $costAtaDAO->findId(3));
+                $productDAO = new ProductDAO();
+                $this->setViewParam('product', $productDAO->findAll());
+
+                $factoryDAO = new FactoryDAO();
+                $this->setViewParam('factory', $factoryDAO->findAll());
+
+                $undDAO = new UndDAO();
+                $this->setViewParam('und', $undDAO->findAll());
+
+                Session::unsetMessage();
+                Session::setMessage('Ata Cadastrada com sucesso');
+                $this->render('/costAta/itens');
+
+               /*if($costAtaDAO->inserCostAta($costAta))
+               {    
+                    $lasId = $costAtaDAO->getLastId();
+                    Session::unsetLastId();
+                    Session::setLastId($lasId);
+                    
+                   
+                    $this->setViewParam('headerCostAta', $costAtaDAO->findId($lasId));
+                    Session::unsetMessage();
+                    Session::setMessage('Ata Cadastrada com sucesso');
+                    $this->render('/costAta/itens');
                }
                else 
                {
@@ -91,7 +119,7 @@ class CostAtaController extends Controller
            {
                 Session::unsetErro();
                 Session::setErro('Nao foi possivel inserir verifique os dados e tente novamente');
-                $this->redirect('/costAta/index');    
+                $this->redirect('/costAta/index');  */  
            }
         }
 

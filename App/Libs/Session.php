@@ -62,4 +62,19 @@
         {
             unset($_SESSION['erro']);
         }
+
+        public static function unsetLastId()
+        {
+            unset($_SESSION['lastId']);
+        }
+
+        public static function setLastId($lastId)
+        {
+            $_SESSION['lastId'] = $lastId;
+        }
+
+        public static function getLastId()
+        {
+            return $_SESSION['lastId'];
+        }
     }
