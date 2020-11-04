@@ -123,6 +123,11 @@ class CostAtaController extends Controller
            }
         }
 
+        public function insertDetail()
+        {
+            var_dump($_POST);
+        }
+
         public function update()
         {
 

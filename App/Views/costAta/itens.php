@@ -1,6 +1,4 @@
-<?php
 
-?>
 
 <section>
     <div>
@@ -48,7 +46,7 @@
 
 <section>
     <h4>Produtos</h4>
-    <form>
+    <form method="POST" action="http://<?php echo APP_HOST; ?>/costAta/insertDetail">
 
         <table style="border: black 1px solid;">
             <thead>
@@ -76,7 +74,7 @@
             <tbody>
                 <?php
                 $a = 0;
-                while ($a < 300) {
+                while ($a < 3) {
                     echo '<tr>';
                     echo '<td><input type="text" name="txt_number_item[]"></td>';
                     echo '<td><textarea name="txt_desc_complete[]"></textarea></td>';
@@ -117,5 +115,7 @@
                 ?>
             </tbody>
         </table>
+
+        <input type="submit" value="enviar">
     </form>
 </section>
