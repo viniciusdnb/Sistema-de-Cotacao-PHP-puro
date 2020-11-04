@@ -71,28 +71,32 @@
 
         public function findAll()
         {
-            $result = $this->select("SELECT cost_Ata.id,
-                                                cost_Ata.id_Client,
-                                                cost_Ata.date,
-                                                cost_Ata.pr,
-                                                cost_Ata.process
-                                                cost_Ata.object,
-                                                cost_Ata.in_day,
-                                                cost_Ata.winner,
-                                                cost_Ata.days_deliver,
-                                                cost_Ata.example,
-                                                cost_Ata.bula,
-                                                cost_Ata.catalog,
-                                                cost_Ata.cbpf,
-                                                cost_Ata.accreditation,
-                                                cost_Ata.register_anvisa,
-                                                cost_Ata.register_dou,
+            $result = $this->select("SELECT cost_ata.id,
+                                                cost_ata.id_Client,
+                                                cost_ata.date,
+                                                cost_ata.pr,
+                                                cost_ata.process,
+                                                cost_ata.object,
+                                                cost_ata.in_day,
+                                                cost_ata.winner,
+                                                cost_ata.days_deliver,
+                                                cost_ata.example,
+                                                cost_ata.bula,
+                                                cost_ata.catalog,
+                                                cost_ata.cbpf,
+                                                cost_ata.accreditation,
+                                                cost_ata.register_anvisa,
+                                                cost_ata.register_dou,
                                                 cost_ata.id_agent,
-                                                client.name_client,                                            
-                                                agent.name_agent
-                                            FROM cost_Ata
-                                            INNER JOIN client ON cost_Ata.id_client = client.id
-                                            INNER JOIN agent ON cost_ata.id_agent = agent.id ");
+                                                client.name_client                                           
+                                                
+                                            FROM cost_ata
+                                            INNER JOIN client ON cost_ata.id_client = client.id");
+
+                                            /*agent.name_agent
+                                            FROM cost_ata
+                                            INNER JOIN client ON cost_ata.id_client = client.id
+                                            INNER JOIN agent ON cost_ata.id_agent = agent.id*/
 
             $dataSetCostAta = $result->fetchAll();
 

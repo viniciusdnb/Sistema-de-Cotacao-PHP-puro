@@ -2,6 +2,7 @@
 
     namespace App\Controllers;
 
+use App\Libs\Session;
 use App\Models\DAO\AgentDAO;
 use App\Models\DAO\ClientDAO;
 use App\Models\DAO\CostAtaDAO;
@@ -12,6 +13,8 @@ class CostAtaController extends Controller
     {
         public function index()
         {
+           $costAtaDAO = new CostAtaDAO();
+           $this->setViewParam('costAta', $costAtaDAO->findAll()); 
            $this->render('/costAta/index');
         }
 
@@ -21,10 +24,7 @@ class CostAtaController extends Controller
             $this->setViewParam('client', $clientDAO->findAll());
 
             $agent = new AgentDAO();
-            $this->setViewParam('agent', $agent->findAll());
-
-
-            
+            $this->setViewParam('agent', $agent->findAll());            
 
             $this->render('/costAta/insert');
 
@@ -74,12 +74,24 @@ class CostAtaController extends Controller
                 $costAta->setRegisterDou($registerDou);
                 
                $costAtaDAO = new CostAtaDAO();
-               var_dump($costAtaDAO->inserCostAta($costAta));
-               
-
-
-
-
+               if($costAtaDAO->inserCostAta($costAta))
+               {
+                   Session::unsetMessage();
+                   Session::setMessage('Cadastrado com sucesso!');
+                   $this->redirect('/costAta/index');
+               }
+               else 
+               {
+                    Session::unsetErro();
+                    Session::setErro('Nao foi possivel inserir tente novamente mais tarde!');
+                    $this->redirect('/costAta/index');
+               }
+           }
+           else 
+           {
+                Session::unsetErro();
+                Session::setErro('Nao foi possivel inserir verifique os dados e tente novamente');
+                $this->redirect('/costAta/index');    
            }
         }
 
