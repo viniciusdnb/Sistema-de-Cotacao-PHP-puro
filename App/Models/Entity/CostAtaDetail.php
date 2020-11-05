@@ -56,79 +56,79 @@
             return $this->idClientAta;
         }
 
-        function getItem(): array {
+        function getItem() {
             return $this->item;
         }
 
-        function getDescCompProduct(): array {
+        function getDescCompProduct() {
             return $this->descCompProduct;
         }
 
-        function getIdProduct(): array {
+        function getIdProduct() {
             return $this->idProduct;
         }
 
-        function getNameProduct(): array {
+        function getNameProduct() {
             return $this->nameProduct;
         }
 
-        function getIdUnd(): array {
+        function getIdUnd() {
             return $this->idUnd;
         }
 
-        function getNameUnd(): array {
+        function getNameUnd() {
             return $this->nameUnd;
         }
 
-        function getQuantity(): array {
+        function getQuantity() {
             return $this->quantity;
         }
 
-        function getIdFactory(): array {
+        function getIdFactory() {
             return $this->idFactory;
         }
 
-        function getNameFactory(): array {
+        function getNameFactory() {
             return $this->nameFactory;
         }
 
-        function getCostUnity(): array {
+        function getCostUnity() {
             return $this->costUnity;
         }
 
-        function getCostTaotal(): array{
+        function getCostTaotal(){
             return $this->costTaotal;
         }
 
-        function getP1(): array {
+        function getP1() {
             return $this->p1;
         }
 
-        function getP1Total(): array {
+        function getP1Total() {
             return $this->p1Total;
         }
 
-        function getP2(): array {
+        function getP2() {
             return $this->p2;
         }
 
-        function getP2Total(): array {
+        function getP2Total() {
             return $this->p2Total;
         }
 
-        function getP3(): array {
+        function getP3() {
             return $this->p3;
         }
 
-        function getP3Total(): array {
+        function getP3Total() {
             return $this->p3Total;
         }
 
-        function getMinimum(): array {
+        function getMinimum() {
             return $this->minimum;
         }
 
-        function getMinimumTotal(): array {
+        function getMinimumTotal() {
             return $this->minimumTotal;
         }
 
@@ -148,79 +148,79 @@
             $this->idClientAta = $idClientAta;
         }
 
-        function setItem(array $item) {
+        function setItem($item) {
             $this->item = $item;
         }
 
-        function setDescCompProduct(array $descCompProduct) {
+        function setDescCompProduct($descCompProduct) {
             $this->descCompProduct = $descCompProduct;
         }
 
-        function setIdProduct(array $idProduct) {
+        function setIdProduct($idProduct) {
             $this->idProduct = $idProduct;
         }
 
-        function setNameProduct(array $nameProduct) {
+        function setNameProduct($nameProduct) {
             $this->nameProduct = $nameProduct;
         }
 
-        function setIdUnd(array $idUnd) {
+        function setIdUnd($idUnd) {
             $this->idUnd = $idUnd;
         }
 
-        function setNameUnd(array $nameUnd) {
+        function setNameUnd($nameUnd) {
             $this->nameUnd = $nameUnd;
         }
 
-        function setQuantity(array $quantity) {
+        function setQuantity($quantity) {
             $this->quantity = $quantity;
         }
 
-        function setIdFactory(array $idFactory) {
+        function setIdFactory($idFactory) {
             $this->idFactory = $idFactory;
         }
 
-        function setNameFactory(array $nameFactory) {
+        function setNameFactory($nameFactory) {
             $this->nameFactory = $nameFactory;
         }
 
-        function setCostUnity(array $costUnity) {
+        function setCostUnity($costUnity) {
             $this->costUnity = $costUnity;
         }
 
-        function setCostTaotal(array $costTaotal) {
+        function setCostTaotal($costTaotal) {
             $this->costTaotal = $costTaotal;
         }
 
-        function setP1(array $p1) {
+        function setP1($p1) {
             $this->p1 = $p1;
         }
 
-        function setP1Total(array $p1Total) {
+        function setP1Total($p1Total) {
             $this->p1Total = $p1Total;
         }
 
-        function setP2(array $p2) {
+        function setP2($p2) {
             $this->p2 = $p2;
         }
 
-        function setP2Total(array $p2Total) {
+        function setP2Total($p2Total) {
             $this->p2Total = $p2Total;
         }
 
-        function setP3(array $p3) {
+        function setP3($p3) {
             $this->p3 = $p3;
         }
 
-        function setP3Total(array $p3Total) {
+        function setP3Total($p3Total) {
             $this->p3Total = $p3Total;
         }
 
-        function setMinimum(array $minimum) {
+        function setMinimum($minimum) {
             $this->minimum = $minimum;
         }
 
-        function setMinimumTotal(array $minimumTotal) {
+        function setMinimumTotal($minimumTotal) {
             $this->minimumTotal = $minimumTotal;
         }
 

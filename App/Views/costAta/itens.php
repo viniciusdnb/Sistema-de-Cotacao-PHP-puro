@@ -1,5 +1,3 @@
-
-
 <section>
     <div>
         <h3>Dados da ata</h3>
@@ -115,6 +113,10 @@
                 ?>
             </tbody>
         </table>
+
+        <input type="hidden" value="<?php echo $viewVar['headerCostAta']->getId() ?>" name="cost_ata_id">
+        <input type="hidden" value="<?php echo $viewVar['headerCostAta']->getPr() ?>" name="cost_ata_pr">
+        <input type="hidden" value="<?php echo $viewVar['headerCostAta']->getIdClient() ?>" name="cost_ata_id_client">
 
         <input type="submit" value="enviar">
     </form>

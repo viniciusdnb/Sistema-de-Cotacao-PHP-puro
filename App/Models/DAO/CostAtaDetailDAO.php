@@ -5,8 +5,10 @@
     use App\Models\DAO\BaseDAO;
     use App\Models\Entity\CostAtaDetail;
     use Exception;
+use PDO;
+use PDOException;
 
-    class CostAtaDetailDAO extends BaseDAO
+class CostAtaDetailDAO extends BaseDAO
     {
         public function findId($id)
         {
@@ -175,103 +177,61 @@
 
         public function insertCostAtaDetail(CostAtaDetail $costAtaDetail)
         {
-            try 
+
+        
+
+       
+           try           
             {
-                $id                 = $costAtaDetail->getId();
-                $totId              = count($id);
                 
-                $idAtaCost          = [];
-                $prAtaCost          = [];
-                $idClientAta        = [];
-                $item               = [];
-                $descCompProduct    = [];
-                $idProduct          = [];
-                $idUnd              = [];
-                $quantity           = [];
-                $idFactory          = [];
-                $costUnity          = [];
-                $costTaotal         = [];
-                $p1                 = [];
-                $p1Total            = [];
-                $p2                 = [];
-                $p2Total            = [];
-                $p3                 = [];
-                $p3Total            = [];
-                $minimum            = [];
-                $minimumTotal       = [];
+                $tot = count($costAtaDetail->getItem());
                 
-                for ($i=0; $i <$totId ; $i++) 
-                {
-                    $idAtaCost[$i]            = $costAtaDetail->getCostAta()->getId();
-                    $prAtaCost[$i]            = $costAtaDetail->getCostAta()->getPr();
-                    $idClientAta[$i]          = $costAtaDetail->getCostAta()->getIdClient();
-                    $item[$i]                 = $costAtaDetail->getItem()[$i];
-                    $descCompProduct[$i]      = $costAtaDetail->getDescCompProduct()[$i];
-                    $idProduct[$i]            = $costAtaDetail->getIdProduct()[$i];
-                    $idUnd[$i]                = $costAtaDetail->getIdUnd()[$i];
-                    $quantity[$i]             = $costAtaDetail->getQuantity()[$i];
-                    $idFactory[$i]            = $costAtaDetail->getIdFactory()[$i];
-                    $costUnity[$i]            = $costAtaDetail->getCostUnity()[$i];
-                    $costTaotal[$i]           = $costAtaDetail->getCostTaotal()[$i];
-                    $p1[$i]                   = $costAtaDetail->getP1()[$i];
-                    $p1Total[$i]              = $costAtaDetail->getP1Total()[$i];
-                    $p2[$i]                   = $costAtaDetail->getP2()[$i];
-                    $p2Total[$i]              = $costAtaDetail->getP2Total()[$i];
-                    $p3[$i]                   = $costAtaDetail->getP3()[$i];
-                    $p3Total[$i]              = $costAtaDetail->getP3Total()[$i];
-                    $minimum[$i]              = $costAtaDetail->getMinimum()[$i];
-                    $minimumTotal[$i]         = $costAtaDetail->getMinimumTotal()[$i];
+                $costAtaId              = $costAtaDetail->getIdAtaCost();
+                $costPr                 = $costAtaDetail->getPrAtaCost();
+                $costidClient           = $costAtaDetail->getIdClientAta();
+                $numberItem             = $costAtaDetail->getItem();
+                $descriptionComplete    = $costAtaDetail->getDescCompProduct();
+                $idProduct              = $costAtaDetail->getIdProduct();
+                $idUnd                  = $costAtaDetail->getIdUnd();
+                $idFactory              = $costAtaDetail->getIdFactory();
+                $quantity               = $costAtaDetail->getQuantity();
+                $costUnity              = $costAtaDetail->getCostUnity();
+                $p1                     = $costAtaDetail->getP1();                                       
+                $p2                     = $costAtaDetail->getP2();
+                $p3                     = $costAtaDetail->getP3();
+                $minimum                = $costAtaDetail->getMinimum();
 
-                    $i++;
-                }
-                    
-                    
                 
-                
-                
-                
-                $result = [];
-
-                /*for ($i=0; $i < $totId ; $i++) { 
-                    $result[] = $this->insert('cost_ata_detail',
+                for ($i=0; $i < $tot ; $i++) 
+                { 
+                    $result = $this->insert('cost_ata_detail',
                     ':id_ata_cost, :pr_ata_cost, :id_client_ata_cost, :item, :desc_comp_product, :id_product, :id_und, :quantity, :id_factory,
-                    :cost_unity, :cost_total, :p1, :p1_total, :p2, :p2_total, :p3, :p3_total, :minimum, :minimum_total', 
+                    :cost_unity, :p1, :p2, :p3, :minimum',
                     [
-                        ':id_ata_cost'          => $idAtaCost[$i],
-                        ':pr_ata_cost'          =>
-                        ':id_client_ata_cost'   =>
-                        ':item'                 =>
-                        ':desc_comp_product'    =>
-                        ':id_product'           =>
-                        ':id_und'               =>
-                        ':quantity'             =>
-                        ':id_factory'           =>
-                        ':cost_unity'           =>
-                        ':cost_total'           =>
-                        ':p1'                   =>
-                        ':p1_total'             =>
-                        ':p2'                   =>
-                        ':p2_total'             =>
-                        ':p3'                   =>
-                        ':p3_total'             =>
-                        ':minimum'              =>
-                        ':minimum_total'        =>
-
+                        ':id_ata_cost'           => $costAtaId,
+                        ':pr_ata_cost'           => $costPr,
+                        ':id_client_ata_cost'    => $costidClient,
+                        ':item'                  => $numberItem[$i],
+                        ':desc_comp_product'     => $descriptionComplete[$i],
+                        ':id_product'            => $idProduct[$i],
+                        ':id_und'                => $idUnd[$i],
+                        ':quantity'              => $quantity[$i],
+                        ':id_factory'            => $idFactory[$i],
+                        ':cost_unity'            => $costUnity[$i],
+                        ':p1'                    => $p1[$i],
+                        ':p2'                    => $p2[$i],
+                        ':p3'                    => $p3[$i],
+                        ':minimum'               => $minimum[$i]
                     ]);
-                }*/
 
-                if($result > 0)
-                {
-                    return TRUE;
-                }
-                else 
-                {
-                    return FALSE;    
-                }
-
-            } catch (\Throwable $th) {
-                //throw $th;
-            }
+                }   
+                
+                return $result;
+                
+            } catch (PDOException $ex) 
+            {
+                throw new Exception("Erro ao cadastrar " . $ex->getMessage(), 500);
+            }      
         }
     }
 
