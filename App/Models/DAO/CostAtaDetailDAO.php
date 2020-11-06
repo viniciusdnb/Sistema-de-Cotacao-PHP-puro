@@ -87,9 +87,8 @@ class CostAtaDetailDAO extends BaseDAO
 
         public function findAll($idCostAta)
         {   
-            $resultTot = $this->select("SELECT COUNT(id_ata_cost) FROM cost_ata_detail WHERE id_ata_cost = '$idCostAta'");
-            $total = $resultTot->fetch();
-            $tot = array_values($total);
+            $resultTot = $this->select("SELECT * FROM cost_ata_detail WHERE id_ata_cost = '$idCostAta'");
+            $total = $resultTot->rowCount();
 
             
             
@@ -124,7 +123,7 @@ class CostAtaDetailDAO extends BaseDAO
             
            
                                      
-            for ($i=0; $i < $tot[0]; $i++) 
+            for ($i=0; $i < $total; $i++) 
             { 
                 
                 $id[]                       = $dataSetCostAtaDetail[$i]['id'];
@@ -182,58 +181,7 @@ class CostAtaDetailDAO extends BaseDAO
           
                                 
             
-            /*if($dataSetCostAtaDetail)
-            {
-                $findAll = [];
-
-                foreach ($dataSetCostAtaDetail as $value) 
-                {
-                    $costAtaDetail = new CostAtaDetail();
-
-                    for ($i=0; $i <$tot ; $i++) 
-                    {
-                        $costAtaDetail->setId($value['id'])[$i];
-                        $costAtaDetail->setIdAtaCost($value['id_ata_cost'])[$i];
-                        $costAtaDetail->setPrAtaCost($value['pr_ata_cost'])[$i];
-                        $costAtaDetail->setIdClientAta($value['id_client_ata_cost'])[$i];
-                        $costAtaDetail->setItem($value['item'])[$i];
-                        $costAtaDetail->setDescCompProduct($value['desc_comp_product'])[$i];
-                        $costAtaDetail->setIdProduct($value['id_product'])[$i];
-                        $costAtaDetail->setNameProduct($value['desc_prod'])[$i];
-                        $costAtaDetail->setIdUnd($value['id_und'])[$i];
-                        $costAtaDetail->setNameUnd($value['und'])[$i];
-                        $costAtaDetail->setQuantity($value['quantity'])[$i];
-                        $costAtaDetail->setIdFactory($value['id_factory'])[$i];
-                        $costAtaDetail->setNameFactory($value['name_factory'])[$i];
-                        $costAtaDetail->setCostUnity($value['cost_unity'])[$i];
-                        
-                        $costAtaDetail->setP1($value['p1'])[$i];
-                       
-                        $costAtaDetail->setP2($value['p2'])[$i];
-                        
-                        $costAtaDetail->setP3($value['p3'])[$i];
-                        
-                        $costAtaDetail->setMinimum($value['minimum'])[$i];
-                        
-
-                        $i++;
-                    }
-                    
-
-
-                    //metodo que retorna a entidade costAta gerado atravez do metodo construtor da entidade costAtaDetail
-                    //e setamos o id do costAta.
-                    $costAtaDetail->getCostAta()->setId($value['id_ata_cost']);
-
-                    $findAll[] = $costAtaDetail;
-                }
-
-                var_dump($findAll);
-            }
-            else 
-            {
-                return FALSE;    
-            }*/
+            
         }
 
         public function insertCostAtaDetail(CostAtaDetail $costAtaDetail)
