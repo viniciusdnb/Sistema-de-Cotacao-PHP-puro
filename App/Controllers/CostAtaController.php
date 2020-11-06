@@ -35,9 +35,30 @@ class CostAtaController extends Controller
 
         }
 
-        public function edit()
+        public function edit($params)
         {
+            if($params[0])
+            {
+                $id = $params[0];
 
+                $costAtaDAO = new CostAtaDAO();
+                $this->setViewParam('headerCostAta', $costAtaDAO->findId($id));
+                $this->render('/costAta/editHeader');
+            }
+        }
+
+        public function editItens($params)
+        {
+            if ($params[0]) {
+                $id = $params[0];
+
+                $costAtaDAO = new CostAtaDAO();
+                $this->setViewParam('headerCostAta', $costAtaDAO->findId($id));
+
+                $costAtaDetailDAO = new CostAtaDetailDAO();
+                $this->setViewParam('itens', $costAtaDetailDAO->findAll($id));
+                //$this->render('/costAta/editItens');
+            }
         }
 
         public function insert()

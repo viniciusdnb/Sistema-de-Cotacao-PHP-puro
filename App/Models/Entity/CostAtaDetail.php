@@ -8,32 +8,32 @@
         private $idAtaCost;
         private $prAtaCost;
         private $idClientAta;
-        private $item               = [];
-        private $descCompProduct    = [];
-        private $idProduct          = [];
-        private $nameProduct        = [];
-        private $idUnd              = [];
-        private $nameUnd            = [];
-        private $quantity           = [];
-        private $idFactory          = [];
-        private $nameFactory        = [];
-        private $costUnity          = [];
-        private $costTaotal         = [];
-        private $p1                 = [];
-        private $p1Total            = [];
-        private $p2                 = [];
-        private $p2Total            = [];
-        private $p3                 = [];
-        private $p3Total            = [];
-        private $minimum            = [];
-        private $minimumTotal       = [];
+        private $item               ;
+        private $descCompProduct    ;
+        private $idProduct          ;
+        private $nameProduct        ;
+        private $idUnd              ;
+        private $nameUnd            ;
+        private $quantity           ;
+        private $idFactory          ;
+        private $nameFactory        ;
+        private $costUnity          ;
+        private $costTaotal         ;
+        private $p1                 ;
+        private $p1Total            ;
+        private $p2                 ;
+        private $p2Total            ;
+        private $p3                 ;
+        private $p3Total            ;
+        private $minimum            ;
+        private $minimumTotal       ;
         //atributo $costAta responsavel por armazenar o obejeto entidade costAta "cabeçalho"
         private $costAta;
 
-        function __construct()
+        /*function __construct()
         {
             $this->costAta = new CostAta();
-        }
+        }*/
 
         function getCostAta()
         {
@@ -136,7 +136,7 @@
             $this->id = $id;
         }
 
-        function setIdAtaCost($idAtaCost) {
+        function setIdAtaCost($idAtaCost){
             $this->idAtaCost = $idAtaCost;
         }
 

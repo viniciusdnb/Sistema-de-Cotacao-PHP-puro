@@ -87,8 +87,12 @@ class CostAtaDetailDAO extends BaseDAO
 
         public function findAll($idCostAta)
         {   
-            $resultTot = $this("SELECT COUNT id_ata_cost FROM cost_ata_detail WHERE id_ata_cost = '$idCostAta'");
+            $resultTot = $this->select("SELECT COUNT(id_ata_cost) FROM cost_ata_detail WHERE id_ata_cost = '$idCostAta'");
+            $total = $resultTot->fetch();
+            $tot = array_values($total);
 
+            
+            
             $result = $this->select("SELECT cost_ata_detail.id,
                                                 cost_ata_detail.id_ata_cost,
                                                 cost_ata_detail.pr_ata_cost,
@@ -99,29 +103,86 @@ class CostAtaDetailDAO extends BaseDAO
                                                 cost_ata_detail.id_und,
                                                 cost_ata_detail.quantity,
                                                 cost_ata_detail.id_factory,
-                                                cost_ata_detail.cost_unity,
-                                                cost_ata_detail.cost_total,
-                                                cost_ata_detail.p1,
-                                                cost_ata_detail.p1_total,
-                                                cost_ata_detail.p2,
-                                                cost_ata_detail.p2_total,
-                                                cost_ata_detail.p3,
-                                                cost_ata_detail.p3_total,
+                                                cost_ata_detail.cost_unity,                                                
+                                                cost_ata_detail.p1,                                                 
+                                                cost_ata_detail.p2,                                               
+                                                cost_ata_detail.p3,                                                
                                                 cost_ata_detail.minimum,
-                                                cost_ata_detail.minimum_total,                                            
-                                                product.name_product,
+                                                product.desc_prod,
                                                 und.und,
                                                 factory.name_factory
                                             FROM cost_ata_detail                                        
                                             INNER JOIN product ON cost_ata_detail.id_product = product.id
                                             INNER JOIN und ON cost_ata_detail.id_und = und.id
-                                            INNER JOIN factory ON cost_ata_detail.id_factoy = factory.id
+                                            INNER JOIN factory ON cost_ata_detail.id_factory = factory.id
                                             WHERE cost_ata_detail.id_ata_cost = '$idCostAta'"
                                      );
 
             $dataSetCostAtaDetail = $result->fetchAll();
+            
+           // var_dump($dataSetCostAtaDetail);
+            
+           
+                                     
+            for ($i=0; $i < $tot[0]; $i++) 
+            { 
+                
+                $id[]                       = $dataSetCostAtaDetail[$i]['id'];
+                $costAtaId[]                = $dataSetCostAtaDetail[$i]['id_ata_cost'];             
+                $costAtaPr[]                = $dataSetCostAtaDetail[$i]['pr_ata_cost'];
+                $costAtaIdClient[]          = $dataSetCostAtaDetail[$i]['id_client_ata_cost'];
+                $numberItem[]               = $dataSetCostAtaDetail[$i]['item'];
+                $descriptionComplete[]      = $dataSetCostAtaDetail[$i]['desc_comp_product'];
+                $idProduct[]                = $dataSetCostAtaDetail[$i]['id_product'];
+                $idUnd[]                    = $dataSetCostAtaDetail[$i]['id_und'];
+                $idFactory[]                = $dataSetCostAtaDetail[$i]['quantity'];
+                $quantity[]                 = $dataSetCostAtaDetail[$i]['id_factory'];
+                $costUnity[]                = $dataSetCostAtaDetail[$i]['cost_unity'];
+                $p1[]                       = $dataSetCostAtaDetail[$i]['p1'];
+                $p2[]                       = $dataSetCostAtaDetail[$i]['p2'];
+                $p3[]                       = $dataSetCostAtaDetail[$i]['p3'];
+                $minimum[]                  = $dataSetCostAtaDetail[$i]['minimum'];
+                $descProd[]                 = $dataSetCostAtaDetail[$i]['desc_prod'];
+                $und[]                      = $dataSetCostAtaDetail[$i]['und'];
+                $nameFactory[]              = $dataSetCostAtaDetail[$i]['name_factory'];
 
-            if($dataSetCostAtaDetail)
+            }
+            
+            
+
+            $costAtaDetail = new CostAtaDetail();
+            $costAtaDetail->setId($id);
+            $costAtaDetail->setIdAtaCost($costAtaId);
+            $costAtaDetail->setPrAtaCost($costAtaPr);
+            $costAtaDetail->setIdClientAta($costAtaIdClient);
+            $costAtaDetail->setItem($numberItem);
+            $costAtaDetail->setDescCompProduct($descriptionComplete);
+            $costAtaDetail->setIdProduct($idProduct);
+            $costAtaDetail->setNameProduct($descProd);
+            $costAtaDetail->setIdUnd($idUnd);
+            $costAtaDetail->setNameUnd($und);
+            $costAtaDetail->setQuantity($quantity);
+            $costAtaDetail->setIdFactory($idFactory);
+            $costAtaDetail->setNameFactory($nameFactory);
+            $costAtaDetail->setCostUnity($costUnity);
+            $costAtaDetail->setP1($p1);
+            $costAtaDetail->setP2($p2);
+            $costAtaDetail->setP3($p3);
+            $costAtaDetail->setMinimum($minimum);
+            
+
+            
+
+            var_dump($costAtaDetail);
+            
+
+            
+
+            
+          
+                                
+            
+            /*if($dataSetCostAtaDetail)
             {
                 $findAll = [];
 
@@ -129,7 +190,7 @@ class CostAtaDetailDAO extends BaseDAO
                 {
                     $costAtaDetail = new CostAtaDetail();
 
-                    for ($i=0; $i <$resultTot ; $i++) 
+                    for ($i=0; $i <$tot ; $i++) 
                     {
                         $costAtaDetail->setId($value['id'])[$i];
                         $costAtaDetail->setIdAtaCost($value['id_ata_cost'])[$i];
@@ -138,22 +199,22 @@ class CostAtaDetailDAO extends BaseDAO
                         $costAtaDetail->setItem($value['item'])[$i];
                         $costAtaDetail->setDescCompProduct($value['desc_comp_product'])[$i];
                         $costAtaDetail->setIdProduct($value['id_product'])[$i];
-                        $costAtaDetail->setNameProduct($value['name_product'])[$i];
+                        $costAtaDetail->setNameProduct($value['desc_prod'])[$i];
                         $costAtaDetail->setIdUnd($value['id_und'])[$i];
                         $costAtaDetail->setNameUnd($value['und'])[$i];
                         $costAtaDetail->setQuantity($value['quantity'])[$i];
                         $costAtaDetail->setIdFactory($value['id_factory'])[$i];
                         $costAtaDetail->setNameFactory($value['name_factory'])[$i];
                         $costAtaDetail->setCostUnity($value['cost_unity'])[$i];
-                        $costAtaDetail->setCostTaotal($value['cost_total'])[$i];
+                        
                         $costAtaDetail->setP1($value['p1'])[$i];
-                        $costAtaDetail->setP1Total($value['p1_total'])[$i];
+                       
                         $costAtaDetail->setP2($value['p2'])[$i];
-                        $costAtaDetail->setP2Total($value['p2_total'])[$i];
+                        
                         $costAtaDetail->setP3($value['p3'])[$i];
-                        $costAtaDetail->setP3Total($value['p3_total'])[$i];
+                        
                         $costAtaDetail->setMinimum($value['minimum'])[$i];
-                        $costAtaDetail->setMinimumTotal($value['minimum_total'])[$i];
+                        
 
                         $i++;
                     }
@@ -167,12 +228,12 @@ class CostAtaDetailDAO extends BaseDAO
                     $findAll[] = $costAtaDetail;
                 }
 
-                return $findAll;
+                var_dump($findAll);
             }
             else 
             {
                 return FALSE;    
-            }
+            }*/
         }
 
         public function insertCostAtaDetail(CostAtaDetail $costAtaDetail)
