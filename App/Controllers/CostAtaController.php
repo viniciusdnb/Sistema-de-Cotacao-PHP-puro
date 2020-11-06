@@ -57,7 +57,17 @@ class CostAtaController extends Controller
 
                 $costAtaDetailDAO = new CostAtaDetailDAO();
                 $this->setViewParam('itens', $costAtaDetailDAO->findAll($id));
-                //$this->render('/costAta/editItens');
+
+                $productDAO = new ProductDAO();
+                $this->setViewParam('product', $productDAO->findAll());
+
+                $undDAO = new UndDAO();
+                $this->setViewParam('und', $undDAO->findAll());
+
+                $factoryDAO = new FactoryDAO();
+                $this->setViewParam('factory', $factoryDAO->findAll());
+                
+                $this->render('/costAta/editItens');
             }
         }
 

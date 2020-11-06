@@ -1,3 +1,11 @@
+<?php
+use App\Libs\FunctionPublic;
+//var_dump($viewVar);
+
+                                    
+
+?>
+
 <section>
     <div>
         <h3>Dados da ata</h3>
@@ -40,4 +48,81 @@
         <input type="text" value="<?php echo $viewVar['headerCostAta']->getRegisterDou() ? "Sim" : "Não" ?>" disabled>
     </div>
 
+</section>
+
+<section>
+    <h4>Produtos</h4>
+    <form method="POST" action="http://<?php echo APP_HOST; ?>/costAta/insertDetail">
+
+        <table style="border: black 1px solid;">
+            <thead>
+                <tr>
+                    <th style="border: black 1px solid;">Numero do Item</th>
+                    <th style="border: black 1px solid;">Descricao Completa</th>
+                    <th style="border: black 1px solid;">Produto</th>
+                    <th style="border: black 1px solid;">Unidade</th>
+                    <th style="border: black 1px solid;">Fabricante</th>
+                    <th style="border: black 1px solid;">Quantidade</th>
+                    <th style="border: black 1px solid;">Valor Unitario</th>
+                    <th style="border: black 1px solid;">Valor Total</th>
+                    <th style="border: black 1px solid;">P1</th>
+                    <th style="border: black 1px solid;">P1 Total</th>
+                    <th style="border: black 1px solid;">P2</th>
+                    <th style="border: black 1px solid;">P2 Total</th>
+                    <th style="border: black 1px solid;">P3</th>
+                    <th style="border: black 1px solid;">P3 Total</th>
+                    <th style="border: black 1px solid;">Minimo</th>
+                    <th style="border: black 1px solid;">Minimo Total</th>
+
+
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                    /*$tot = count($viewVar['itens']->getId());
+
+                    $nameObject = 
+                    [
+                        0 => 'product',
+                        1 => 'itens'
+                    ];
+                    $action = 
+                    [
+                        0 => 'getId',
+                        1 => 'getIdProduct'
+                    ];
+
+
+                    $cbxProduct = new FunctionPublic($viewVar, $nameObject, $action);
+
+
+                   for ($i=0; $i < $tot; $i++) { 
+                        echo '<tr>';
+                        echo '<td><input type="text" value="' . $viewVar['itens']->getItem()[$i] . '" name="txt_id"></td>';
+                        echo '<td><input type="text" value="' . $viewVar['itens']->getDescCompProduct()[$i] . '" name="txt_id"></td>';
+                        echo '<td><select>';
+                        foreach ($viewVar['product'] as $value) 
+                        {
+                            echo '<option value="'.$value->getId().'">'; 
+                            echo $cbxProduct->cbxSelect() == $viewVar['itens']->getIdProduct()[$i] ? 'selected="selected"' : '';
+                            echo $value->getDescProd().'</option>';
+                            
+                        }
+                        echo '</select></td >';
+                        echo '</tr>';
+                   }*/
+                
+                
+
+
+                ?>
+            </tbody>
+        </table>
+
+        <input type="hidden" value="<?php echo $viewVar['headerCostAta']->getId() ?>" name="cost_ata_id">
+        <input type="hidden" value="<?php echo $viewVar['headerCostAta']->getPr() ?>" name="cost_ata_pr">
+        <input type="hidden" value="<?php echo $viewVar['headerCostAta']->getIdClient() ?>" name="cost_ata_id_client">
+
+        <input type="submit" value="enviar">
+    </form>
 </section>

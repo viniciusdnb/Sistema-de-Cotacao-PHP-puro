@@ -14,6 +14,8 @@
             
             $this->action = $action;
             $this->viewVar = $viewVar;
+
+            
         
         }
 

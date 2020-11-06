@@ -119,60 +119,63 @@ class CostAtaDetailDAO extends BaseDAO
 
             $dataSetCostAtaDetail = $result->fetchAll();
             
-           // var_dump($dataSetCostAtaDetail);
+           if($dataSetCostAtaDetail)
+           {
+                for ($i = 0; $i < $total; $i++) {
+
+                    $id[]                       = $dataSetCostAtaDetail[$i]['id'];
+                    $costAtaId[]                = $dataSetCostAtaDetail[$i]['id_ata_cost'];
+                    $costAtaPr[]                = $dataSetCostAtaDetail[$i]['pr_ata_cost'];
+                    $costAtaIdClient[]          = $dataSetCostAtaDetail[$i]['id_client_ata_cost'];
+                    $numberItem[]               = $dataSetCostAtaDetail[$i]['item'];
+                    $descriptionComplete[]      = $dataSetCostAtaDetail[$i]['desc_comp_product'];
+                    $idProduct[]                = $dataSetCostAtaDetail[$i]['id_product'];
+                    $idUnd[]                    = $dataSetCostAtaDetail[$i]['id_und'];
+                    $idFactory[]                = $dataSetCostAtaDetail[$i]['quantity'];
+                    $quantity[]                 = $dataSetCostAtaDetail[$i]['id_factory'];
+                    $costUnity[]                = $dataSetCostAtaDetail[$i]['cost_unity'];
+                    $p1[]                       = $dataSetCostAtaDetail[$i]['p1'];
+                    $p2[]                       = $dataSetCostAtaDetail[$i]['p2'];
+                    $p3[]                       = $dataSetCostAtaDetail[$i]['p3'];
+                    $minimum[]                  = $dataSetCostAtaDetail[$i]['minimum'];
+                    $descProd[]                 = $dataSetCostAtaDetail[$i]['desc_prod'];
+                    $und[]                      = $dataSetCostAtaDetail[$i]['und'];
+                    $nameFactory[]              = $dataSetCostAtaDetail[$i]['name_factory'];
+                }
+
+
+
+                $costAtaDetail = new CostAtaDetail();
+                $costAtaDetail->setId($id);
+                $costAtaDetail->setIdAtaCost($costAtaId);
+                $costAtaDetail->setPrAtaCost($costAtaPr);
+                $costAtaDetail->setIdClientAta($costAtaIdClient);
+                $costAtaDetail->setItem($numberItem);
+                $costAtaDetail->setDescCompProduct($descriptionComplete);
+                $costAtaDetail->setIdProduct($idProduct);
+                $costAtaDetail->setNameProduct($descProd);
+                $costAtaDetail->setIdUnd($idUnd);
+                $costAtaDetail->setNameUnd($und);
+                $costAtaDetail->setQuantity($quantity);
+                $costAtaDetail->setIdFactory($idFactory);
+                $costAtaDetail->setNameFactory($nameFactory);
+                $costAtaDetail->setCostUnity($costUnity);
+                $costAtaDetail->setP1($p1);
+                $costAtaDetail->setP2($p2);
+                $costAtaDetail->setP3($p3);
+                $costAtaDetail->setMinimum($minimum);
+
+                return $costAtaDetail;
+           }
             
            
                                      
-            for ($i=0; $i < $total; $i++) 
-            { 
-                
-                $id[]                       = $dataSetCostAtaDetail[$i]['id'];
-                $costAtaId[]                = $dataSetCostAtaDetail[$i]['id_ata_cost'];             
-                $costAtaPr[]                = $dataSetCostAtaDetail[$i]['pr_ata_cost'];
-                $costAtaIdClient[]          = $dataSetCostAtaDetail[$i]['id_client_ata_cost'];
-                $numberItem[]               = $dataSetCostAtaDetail[$i]['item'];
-                $descriptionComplete[]      = $dataSetCostAtaDetail[$i]['desc_comp_product'];
-                $idProduct[]                = $dataSetCostAtaDetail[$i]['id_product'];
-                $idUnd[]                    = $dataSetCostAtaDetail[$i]['id_und'];
-                $idFactory[]                = $dataSetCostAtaDetail[$i]['quantity'];
-                $quantity[]                 = $dataSetCostAtaDetail[$i]['id_factory'];
-                $costUnity[]                = $dataSetCostAtaDetail[$i]['cost_unity'];
-                $p1[]                       = $dataSetCostAtaDetail[$i]['p1'];
-                $p2[]                       = $dataSetCostAtaDetail[$i]['p2'];
-                $p3[]                       = $dataSetCostAtaDetail[$i]['p3'];
-                $minimum[]                  = $dataSetCostAtaDetail[$i]['minimum'];
-                $descProd[]                 = $dataSetCostAtaDetail[$i]['desc_prod'];
-                $und[]                      = $dataSetCostAtaDetail[$i]['und'];
-                $nameFactory[]              = $dataSetCostAtaDetail[$i]['name_factory'];
-
-            }
             
-            
-
-            $costAtaDetail = new CostAtaDetail();
-            $costAtaDetail->setId($id);
-            $costAtaDetail->setIdAtaCost($costAtaId);
-            $costAtaDetail->setPrAtaCost($costAtaPr);
-            $costAtaDetail->setIdClientAta($costAtaIdClient);
-            $costAtaDetail->setItem($numberItem);
-            $costAtaDetail->setDescCompProduct($descriptionComplete);
-            $costAtaDetail->setIdProduct($idProduct);
-            $costAtaDetail->setNameProduct($descProd);
-            $costAtaDetail->setIdUnd($idUnd);
-            $costAtaDetail->setNameUnd($und);
-            $costAtaDetail->setQuantity($quantity);
-            $costAtaDetail->setIdFactory($idFactory);
-            $costAtaDetail->setNameFactory($nameFactory);
-            $costAtaDetail->setCostUnity($costUnity);
-            $costAtaDetail->setP1($p1);
-            $costAtaDetail->setP2($p2);
-            $costAtaDetail->setP3($p3);
-            $costAtaDetail->setMinimum($minimum);
             
 
             
 
-            var_dump($costAtaDetail);
+            
             
 
             
