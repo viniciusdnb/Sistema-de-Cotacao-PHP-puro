@@ -1,8 +1,22 @@
 <?php
-use App\Libs\FunctionPublic;
-//var_dump($viewVar);
 
-                                    
+                                    if ($Session::getMessage() !== "") {
+
+                                        echo '<div>';
+                                        echo $Session::getMessage();
+                                        $Session::unsetMessage();
+                                        echo '</div>';
+                                    }
+
+                                    if ($Session::getErro() !== "") {
+
+                                        echo '<div>';
+                                        echo $Session::getErro();
+                                        $Session::unsetErro();
+                                        echo '</div>';
+                                    }
+
+
 
 ?>
 
@@ -52,11 +66,12 @@ use App\Libs\FunctionPublic;
 
 <section>
     <h4>Produtos</h4>
-    <form method="POST" action="http://<?php echo APP_HOST; ?>/costAta/insertDetail">
+    <form method="POST" action="http://<?php echo APP_HOST; ?>/costAta/updateDetail">
 
         <table style="border: black 1px solid;">
             <thead>
                 <tr>
+                    <th style="border: black 1px solid;">opçoes</th>
                     <th style="border: black 1px solid;">Numero do Item</th>
                     <th style="border: black 1px solid;">Descricao Completa</th>
                     <th style="border: black 1px solid;">Produto</th>
@@ -79,40 +94,58 @@ use App\Libs\FunctionPublic;
             </thead>
             <tbody>
                 <?php
-                    /*$tot = count($viewVar['itens']->getId());
-
-                    $nameObject = 
-                    [
-                        0 => 'product',
-                        1 => 'itens'
-                    ];
-                    $action = 
-                    [
-                        0 => 'getId',
-                        1 => 'getIdProduct'
-                    ];
+                $tot = count($viewVar['itens']->getId());
 
 
-                    $cbxProduct = new FunctionPublic($viewVar, $nameObject, $action);
 
 
-                   for ($i=0; $i < $tot; $i++) { 
-                        echo '<tr>';
-                        echo '<td><input type="text" value="' . $viewVar['itens']->getItem()[$i] . '" name="txt_id"></td>';
-                        echo '<td><input type="text" value="' . $viewVar['itens']->getDescCompProduct()[$i] . '" name="txt_id"></td>';
-                        echo '<td><select>';
-                        foreach ($viewVar['product'] as $value) 
-                        {
-                            echo '<option value="'.$value->getId().'">'; 
-                            echo $cbxProduct->cbxSelect() == $viewVar['itens']->getIdProduct()[$i] ? 'selected="selected"' : '';
-                            echo $value->getDescProd().'</option>';
-                            
-                        }
-                        echo '</select></td >';
-                        echo '</tr>';
-                   }*/
-                
-                
+                for ($i = 0; $i < $tot; $i++) {                    
+                    echo '<tr>';
+
+                    echo '<td><a href="http://' . APP_HOST . '/costAta/deleteItem/' . $viewVar['itens']->getId()[$i].'/' . $viewVar['headerCostAta']->getId() . '">Excluir Item</a></td>';
+                    echo '<td><input type="text" value="' . $viewVar['itens']->getItem()[$i] . '" name="txt_number_item[]"></td>';
+                    echo '<td><input type="text" value="' . $viewVar['itens']->getDescCompProduct()[$i] . '" name="txt_desc_complete[]"></td>';
+
+                    echo '<td><select name="txt_id_product[]">';
+                    foreach ($viewVar['product'] as $valueProd) {
+                        echo '<option value="' . $valueProd->getId() . '"';
+                        echo $valueProd->getId() == $viewVar['itens']->getIdProduct()[$i] ? 'selected="selected"' : '';
+                        echo '>' . $valueProd->getDescProd() . '</option>';
+                    }
+                    echo '</select></td>';
+
+                    echo '<td><select name="txt_id_und[]">';
+                    foreach ($viewVar['und'] as $valueUnd) {
+                        echo '<option value="' . $valueUnd->getId() . '"';
+                        echo $valueUnd->getId() == $viewVar['itens']->getIdUnd()[$i] ? 'selected="selected"' : '';
+                        echo '>' . $valueUnd->getUnd() . '</option>';
+                    }
+                    echo '</select></td>';
+
+                    echo '<td><select name="txt_id_factory[]">';
+                    foreach ($viewVar['factory'] as $valueFactory) {
+                        echo '<option value="' . $valueFactory->getId() . '"';
+                        echo $valueFactory->getId() == $viewVar['itens']->getIdFactory()[$i] ? 'selected="selected"' : '';
+                        echo '>' . $valueFactory->getNameFactory() . '</option>';
+                    }
+                    echo '</select></td>';
+
+                    echo '<td><input type="text" value="' . number_format($viewVar['itens']->getQuantity()[$i], '0', ',', '.') . '" name="txt_quantity[]"></td>';
+                    echo '<td><input type="text" value="' . 'R$ ' . number_format($viewVar['itens']->getCostUnity()[$i], '2', ',', '.') . '" name="txt_cost_unity[]"></td>';
+                    echo '<td><input type="text" value="' . 'R$ ' . number_format($viewVar['itens']->getQuantity()[$i] * $viewVar['itens']->getCostUnity()[$i], '2', ',', '.') . '"></td>';
+                    echo '<td><input type="text" value="' . $viewVar['itens']->getP1()[$i] . '" name="txt_p1[]"></td>';
+                    echo '<td><input type="text"></td>';
+                    echo '<td><input type="text" value="' . $viewVar['itens']->getP2()[$i] . '" name="txt_p2[]"></td>';
+                    echo '<td><input type="text"></td>';
+                    echo '<td><input type="text" value="' . $viewVar['itens']->getP3()[$i] . '" name="txt_p3[]"></td>';
+                    echo '<td><input type="text"></td>';
+                    echo '<td><input type="text" value="' . $viewVar['itens']->getMinimum()[$i] . '" name="txt_minimum[]"></td>';
+                    echo '<td><input type="text"></td>';
+
+                    echo '</tr>';
+                }
+
+
 
 
                 ?>

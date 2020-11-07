@@ -49,7 +49,12 @@ class CostAtaController extends Controller
 
         public function editItens($params)
         {
-            if ($params[0]) {
+            
+
+            if(is_array($params))
+            {
+                if ($params[0]) 
+                {
                 $id = $params[0];
 
                 $costAtaDAO = new CostAtaDAO();
@@ -68,7 +73,32 @@ class CostAtaController extends Controller
                 $this->setViewParam('factory', $factoryDAO->findAll());
                 
                 $this->render('/costAta/editItens');
+                }
+            }else
+            {
+               if ($params)
+               {               
+
+                $costAtaDAO = new CostAtaDAO();
+                $this->setViewParam('headerCostAta', $costAtaDAO->findId($params));
+
+                $costAtaDetailDAO = new CostAtaDetailDAO();
+                $this->setViewParam('itens', $costAtaDetailDAO->findAll($params));
+
+                $productDAO = new ProductDAO();
+                $this->setViewParam('product', $productDAO->findAll());
+
+                $undDAO = new UndDAO();
+                $this->setViewParam('und', $undDAO->findAll());
+
+                $factoryDAO = new FactoryDAO();
+                $this->setViewParam('factory', $factoryDAO->findAll());
+                
+                $this->render('/costAta/editItens');
+                }
             }
+
+            
         }
 
         public function insert()
@@ -218,6 +248,50 @@ class CostAtaController extends Controller
         public function delete()
         {
 
+        }
+
+        public function updateDetail()
+        {
+
+        }
+
+        public function deleteItem($params)
+        {
+            if($params)
+            {        
+                    $idProd     = $params[0];
+                    $idAta = $params[1];
+                   
+
+                    $costAtaDetail = new CostAtaDetail();
+                    $costAtaDetail->setId($idProd);
+
+                    
+                    $costAtaDetailDAO = new CostAtaDetailDAO();
+                    
+              
+                    if($costAtaDetailDAO->deleteCostDetail($costAtaDetail))
+                    {                        
+                        Session::unsetMessage();
+                        Session::setMessage('itens Excluido com sucesso');
+                        $this->editItens($idAta);                           
+                    }
+                    else 
+                    {
+                        Session::unsetErro();
+                        Session::setErro('Nao foi possivel Excluir tente novamente mais tarde!');
+                    $this->editItens($idAta); 
+                    }
+                }
+                else 
+                {
+                    
+                    Session::unsetErro();
+                    Session::setErro('id ata Nao foi possivel Excluir tente novamente mais tarde!');
+                    $this->redirect('/costAta/index');        
+                }
+                
+            
         }
     }
 

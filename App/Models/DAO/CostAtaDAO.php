@@ -265,7 +265,11 @@
 
                 if($this->delete('cost_ata', "id = '$id'"))
                 {
-                    return TRUE;
+                    if($this->delete('cost_ata_detail', "id_ata_cost = '$id'"))
+                    {
+                        return TRUE;
+                    }
+                    
                 }
                 else 
                 {
