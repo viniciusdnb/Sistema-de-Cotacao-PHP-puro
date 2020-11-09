@@ -92,7 +92,7 @@
                     <ul>
                         <a href="http://<?php echo APP_HOST; ?>/costAta/index">
 
-                            <p>Inserir Custo de atas</p>
+                            <p> Custo de atas</p>
                         </a>
                     </ul>
                 </li>

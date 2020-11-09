@@ -34,7 +34,7 @@
         <label>Processo</label>
         <input type="text" value="<?php echo $viewVar['headerCostAta']->getProcess() ?>" disabled>
         <label>objeto</label>
-        <textarea disabled><?php echo $viewVar['headerCostAta']->getObject() ?>"</textarea>
+        <textarea disabled><?php echo $viewVar['headerCostAta']->getObject() ?></textarea>
     </div>
     <div>
         <h4>Relações de documentos</h4>
@@ -94,58 +94,67 @@
             </thead>
             <tbody>
                 <?php
-                $tot = count($viewVar['itens']->getId());
+
+                if($viewVar['itens'])
+                {
+                    $tot = count($viewVar['itens']->getId());
 
 
 
 
-                for ($i = 0; $i < $tot; $i++) {                    
-                    echo '<tr>';
+                    for ($i = 0; $i < $tot; $i++) {
+                        echo '<tr>';
 
-                    echo '<td><a href="http://' . APP_HOST . '/costAta/deleteItem/' . $viewVar['itens']->getId()[$i].'/' . $viewVar['headerCostAta']->getId() . '">Excluir Item</a></td>';
-                    echo '<td><input type="text" value="' . $viewVar['itens']->getItem()[$i] . '" name="txt_number_item[]"></td>';
-                    echo '<td><input type="text" value="' . $viewVar['itens']->getDescCompProduct()[$i] . '" name="txt_desc_complete[]"></td>';
+                        echo '<td><a href="http://' . APP_HOST . '/costAta/deleteItem/' . $viewVar['itens']->getId()[$i] . '/' . $viewVar['headerCostAta']->getId() . '">Excluir Item</a></td>';
+                        echo '<td><input type="text" value="' . $viewVar['itens']->getItem()[$i] . '" name="txt_number_item[]"></td>';
+                        echo '<td><input type="text" value="' . $viewVar['itens']->getDescCompProduct()[$i] . '" name="txt_desc_complete[]"></td>';
 
-                    echo '<td><select name="txt_id_product[]">';
-                    foreach ($viewVar['product'] as $valueProd) {
-                        echo '<option value="' . $valueProd->getId() . '"';
-                        echo $valueProd->getId() == $viewVar['itens']->getIdProduct()[$i] ? 'selected="selected"' : '';
-                        echo '>' . $valueProd->getDescProd() . '</option>';
+                        echo '<td><select name="txt_id_product[]">';
+                        foreach ($viewVar['product'] as $valueProd) {
+                            echo '<option value="' . $valueProd->getId() . '"';
+                            echo $valueProd->getId() == $viewVar['itens']->getIdProduct()[$i] ? 'selected="selected"' : '';
+                            echo '>' . $valueProd->getDescProd() . '</option>';
+                        }
+                        echo '</select></td>';
+
+                        echo '<td><select name="txt_id_und[]">';
+                        foreach ($viewVar['und'] as $valueUnd) {
+                            echo '<option value="' . $valueUnd->getId() . '"';
+                            echo $valueUnd->getId() == $viewVar['itens']->getIdUnd()[$i] ? 'selected="selected"' : '';
+                            echo '>' . $valueUnd->getUnd() . '</option>';
+                        }
+                        echo '</select></td>';
+
+                        echo '<td><select name="txt_id_factory[]">';
+                        foreach ($viewVar['factory'] as $valueFactory) {
+                            echo '<option value="' . $valueFactory->getId() . '"';
+                            echo $valueFactory->getId() == $viewVar['itens']->getIdFactory()[$i] ? 'selected="selected"' : '';
+                            echo '>' . $valueFactory->getNameFactory() . '</option>';
+                        }
+                        echo '</select></td>';
+
+                        echo '<td><input type="text" value="' . number_format($viewVar['itens']->getQuantity()[$i], '0', ',', '.') . '" name="txt_quantity[]"></td>';
+                        echo '<td><input type="text" value="' . 'R$ ' . number_format($viewVar['itens']->getCostUnity()[$i], '2', ',', '.') . '" name="txt_cost_unity[]"></td>';
+                        echo '<td><input type="text" value="' . 'R$ ' . number_format($viewVar['itens']->getQuantity()[$i] * $viewVar['itens']->getCostUnity()[$i], '2', ',', '.') . '"></td>';
+                        echo '<td><input type="text" value="' . $viewVar['itens']->getP1()[$i] . '" name="txt_p1[]"></td>';
+                        echo '<td><input type="text"></td>';
+                        echo '<td><input type="text" value="' . $viewVar['itens']->getP2()[$i] . '" name="txt_p2[]"></td>';
+                        echo '<td><input type="text"></td>';
+                        echo '<td><input type="text" value="' . $viewVar['itens']->getP3()[$i] . '" name="txt_p3[]"></td>';
+                        echo '<td><input type="text"></td>';
+                        echo '<td><input type="text" value="' . $viewVar['itens']->getMinimum()[$i] . '" name="txt_minimum[]"></td>';
+                        echo '<td><input type="text"></td>';
+
+                        echo '</tr>';
+                        echo '<input type="hidden" value="' . $viewVar['itens']->getId()[$i] . '" name="id[]">';
                     }
-                    echo '</select></td>';
-
-                    echo '<td><select name="txt_id_und[]">';
-                    foreach ($viewVar['und'] as $valueUnd) {
-                        echo '<option value="' . $valueUnd->getId() . '"';
-                        echo $valueUnd->getId() == $viewVar['itens']->getIdUnd()[$i] ? 'selected="selected"' : '';
-                        echo '>' . $valueUnd->getUnd() . '</option>';
-                    }
-                    echo '</select></td>';
-
-                    echo '<td><select name="txt_id_factory[]">';
-                    foreach ($viewVar['factory'] as $valueFactory) {
-                        echo '<option value="' . $valueFactory->getId() . '"';
-                        echo $valueFactory->getId() == $viewVar['itens']->getIdFactory()[$i] ? 'selected="selected"' : '';
-                        echo '>' . $valueFactory->getNameFactory() . '</option>';
-                    }
-                    echo '</select></td>';
-
-                    echo '<td><input type="text" value="' . number_format($viewVar['itens']->getQuantity()[$i], '0', ',', '.') . '" name="txt_quantity[]"></td>';
-                    echo '<td><input type="text" value="' . 'R$ ' . number_format($viewVar['itens']->getCostUnity()[$i], '2', ',', '.') . '" name="txt_cost_unity[]"></td>';
-                    echo '<td><input type="text" value="' . 'R$ ' . number_format($viewVar['itens']->getQuantity()[$i] * $viewVar['itens']->getCostUnity()[$i], '2', ',', '.') . '"></td>';
-                    echo '<td><input type="text" value="' . $viewVar['itens']->getP1()[$i] . '" name="txt_p1[]"></td>';
-                    echo '<td><input type="text"></td>';
-                    echo '<td><input type="text" value="' . $viewVar['itens']->getP2()[$i] . '" name="txt_p2[]"></td>';
-                    echo '<td><input type="text"></td>';
-                    echo '<td><input type="text" value="' . $viewVar['itens']->getP3()[$i] . '" name="txt_p3[]"></td>';
-                    echo '<td><input type="text"></td>';
-                    echo '<td><input type="text" value="' . $viewVar['itens']->getMinimum()[$i] . '" name="txt_minimum[]"></td>';
-                    echo '<td><input type="text"></td>';
-
-                    echo '</tr>';
                 }
+                else {
+                    echo 'nao a item cadastrado';
+                }
+                
 
-
+                
 
 
                 ?>
@@ -156,6 +165,6 @@
         <input type="hidden" value="<?php echo $viewVar['headerCostAta']->getPr() ?>" name="cost_ata_pr">
         <input type="hidden" value="<?php echo $viewVar['headerCostAta']->getIdClient() ?>" name="cost_ata_id_client">
 
-        <input type="submit" value="enviar">
+        <input type="submit" value="Salvar">
     </form>
 </section>

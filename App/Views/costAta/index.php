@@ -48,11 +48,11 @@ if ($Session::getErro() !== "") {
 
                 foreach ($viewVar['costAta'] as $value) {
                     echo "<tr>";
-                    echo "<td><a href=http://" . APP_HOST . "/costAta/edit/" . $value->getId() . ">" . $value->getId() . "</a></td>";
-                    echo "<td><a href=http://" . APP_HOST . "/costAta/edit/" . $value->getId() . ">" . $value->getNameClient() . "</a></td>";
-                    echo "<td><a href=http://" . APP_HOST . "/costAta/edit/" . $value->getId() . ">" . $value->getDate() . "</a></td>";
-                    echo "<td><a href=http://" . APP_HOST . "/costAta/edit/" . $value->getId() . ">" . $value->getPr() . "</a></td>";
-                    echo "<td><a href=http://" . APP_HOST . "/costAta/edit/" . $value->getId() . ">" . $value->getProcess() . "</a></td>";
+                    echo "<td><a href=http://" . APP_HOST . "/costAta/resume/" . $value->getId() . ">" . $value->getId() . "</a></td>";
+                    echo "<td><a href=http://" . APP_HOST . "/costAta/resume/" . $value->getId() . ">" . $value->getNameClient() . "</a></td>";
+                    echo "<td><a href=http://" . APP_HOST . "/costAta/resume/" . $value->getId() . ">" . $value->getDate() . "</a></td>";
+                    echo "<td><a href=http://" . APP_HOST . "/costAta/resume/" . $value->getId() . ">" . $value->getPr() . "</a></td>";
+                    echo "<td><a href=http://" . APP_HOST . "/costAta/resume/" . $value->getId() . ">" . $value->getProcess() . "</a></td>";
                     
                     echo "</tr>";
                 }

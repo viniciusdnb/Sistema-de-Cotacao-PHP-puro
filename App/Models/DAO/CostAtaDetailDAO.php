@@ -212,7 +212,9 @@ class CostAtaDetailDAO extends BaseDAO
         {
             try 
             {
+              
                 $tot = count($costAtaDetail->getItem());
+               
                 $id                     = $costAtaDetail->getId();
                 $costAtaId              = $costAtaDetail->getIdAtaCost();
                 $costPr                 = $costAtaDetail->getPrAtaCost();
@@ -232,10 +234,10 @@ class CostAtaDetailDAO extends BaseDAO
 
                 for ($i = 0; $i < $tot; $i++) 
                 {
-                    $result = $this->update(
+                    $result[] = $this->update(
                         'cost_ata_detail',
-                        ':id_ata_cost, :pr_ata_cost, :id_client_ata_cost, :item, :desc_comp_product, :id_product, :id_und, :quantity, :id_factory,
-                        :cost_unity, :p1, :p2, :p3, :minimum',
+                    'id_ata_cost = :id_ata_cost, pr_ata_cost = :pr_ata_cost, id_client_ata_cost = :id_client_ata_cost, item = :item, desc_comp_product = :desc_comp_product, id_product = :id_product, id_und = :id_und, quantity = :quantity, id_factory = :id_factory,
+                        cost_unity = :cost_unity, p1 = :p1, p2 = :p2, p3 = :p3, minimum = :minimum',
                         [
                             ':id'                    => $id[$i],
                             ':id_ata_cost'           => $costAtaId,
@@ -256,7 +258,7 @@ class CostAtaDetailDAO extends BaseDAO
                         "id = :id"                        
                     );
                 }
-
+                var_dump($result);
                 return $result;
             } 
             catch (PDOException $ex) 
@@ -271,7 +273,8 @@ class CostAtaDetailDAO extends BaseDAO
             
             try {
             
-                $id = $costAtaDetail->getId();
+                
+                $id = $costAtaDetail->getIdAtaCost();
                 
 
                 if ($this->delete('cost_ata_detail', "id = '$id'")) {

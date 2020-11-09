@@ -263,18 +263,37 @@
             {
                 $id = $costAta->getId();
 
-                if($this->delete('cost_ata', "id = '$id'"))
+                $costAtaDetailDAO = new CostAtaDetailDAO();
+                $t = $costAtaDetailDAO->findAll($id);
+                
+                if($t)
                 {
-                    if($this->delete('cost_ata_detail', "id_ata_cost = '$id'"))
+                    if ($this->delete('cost_ata_detail', "id_ata_cost = '$id'")) 
+                    {
+                        if ($this->delete('cost_ata', "id = '$id'")) 
+                        {
+                            return TRUE;
+                        }
+                    } else 
+                    {
+                        return FALSE;
+                    }
+                }
+                else
+                {
+                    if ($this->delete('cost_ata', "id = '$id'")) 
                     {
                         return TRUE;
-                    }
                     
+                    } 
+                    else 
+                    {
+                        return FALSE;
+                    }
                 }
-                else 
-                {
-                    return FALSE;    
-                }
+
+
+                
             }
             catch (\Exception $ex)
             {
