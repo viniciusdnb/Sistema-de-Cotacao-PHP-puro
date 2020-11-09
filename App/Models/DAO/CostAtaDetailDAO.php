@@ -27,6 +27,7 @@ class CostAtaDetailDAO extends BaseDAO
                                             cost_ata_detail.p2,                                            
                                             cost_ata_detail.p3,                                            
                                             cost_ata_detail.minimum,
+                                            cost_ata_detail.status,
                                             product.name_product,
                                             und.und,
                                             factory.name_factory
@@ -61,6 +62,7 @@ class CostAtaDetailDAO extends BaseDAO
                 $costAtaDetail->setP3($dataSetCostAtaDetail['p3']);
                 $costAtaDetail->setP3Total($dataSetCostAtaDetail['p3_total']);
                 $costAtaDetail->setMinimum($dataSetCostAtaDetail['minimum']);
+                $costAtaDetail->setStatus($dataSetCostAtaDetail['status']);
 
                 return $costAtaDetail;
 
@@ -93,6 +95,7 @@ class CostAtaDetailDAO extends BaseDAO
                                                 cost_ata_detail.p2,                                               
                                                 cost_ata_detail.p3,                                                
                                                 cost_ata_detail.minimum,
+                                                cost_ata_detail.status,
                                                 product.desc_prod,
                                                 und.und,
                                                 factory.name_factory
@@ -127,6 +130,7 @@ class CostAtaDetailDAO extends BaseDAO
                     $descProd[]                 = $dataSetCostAtaDetail[$i]['desc_prod'];
                     $und[]                      = $dataSetCostAtaDetail[$i]['und'];
                     $nameFactory[]              = $dataSetCostAtaDetail[$i]['name_factory'];
+                    $status[]                   = $dataSetCostAtaDetail[$i]['status'];
                 }
 
                 $costAtaDetail = new CostAtaDetail();
@@ -148,7 +152,7 @@ class CostAtaDetailDAO extends BaseDAO
                 $costAtaDetail->setP2($p2);
                 $costAtaDetail->setP3($p3);
                 $costAtaDetail->setMinimum($minimum);
-
+                $costAtaDetail->setStatus($status);
                 return $costAtaDetail;
            }     
         }
@@ -174,13 +178,14 @@ class CostAtaDetailDAO extends BaseDAO
                 $p2                     = $costAtaDetail->getP2();
                 $p3                     = $costAtaDetail->getP3();
                 $minimum                = $costAtaDetail->getMinimum();
+                $status                 = 0;
 
                 
                 for ($i=0; $i < $tot ; $i++) 
                 { 
                     $result = $this->insert('cost_ata_detail',
                     ':id_ata_cost, :pr_ata_cost, :id_client_ata_cost, :item, :desc_comp_product, :id_product, :id_und, :quantity, :id_factory,
-                    :cost_unity, :p1, :p2, :p3, :minimum',
+                    :cost_unity, :p1, :p2, :p3, :minimum, :status',
                     [
                         ':id_ata_cost'           => $costAtaId,
                         ':pr_ata_cost'           => $costPr,
@@ -195,7 +200,8 @@ class CostAtaDetailDAO extends BaseDAO
                         ':p1'                    => $p1[$i],
                         ':p2'                    => $p2[$i],
                         ':p3'                    => $p3[$i],
-                        ':minimum'               => $minimum[$i]
+                        ':minimum'               => $minimum[$i],
+                        ':status'                => $status
                     ]);
 
                 }   
@@ -206,6 +212,75 @@ class CostAtaDetailDAO extends BaseDAO
             {
                 throw new Exception("Erro ao cadastrar " . $ex->getMessage(), 500);
             }      
+        }
+
+        public function findAllStatus()
+        {
+            $result = $this->select("SELECT cost_ata_detail.id,
+                                                cost_ata_detail.id_ata_cost,
+                                                cost_ata_detail.pr_ata_cost,
+                                                cost_ata_detail.id_client_ata_cost,
+                                                cost_ata_detail.item,
+                                                cost_ata_detail.desc_comp_product,
+                                                cost_ata_detail.id_product,
+                                                cost_ata_detail.id_und,
+                                                cost_ata_detail.quantity,
+                                                cost_ata_detail.id_factory,                                                
+                                                cost_ata_detail.status,
+                                                product.desc_prod,
+                                                und.und,
+                                                factory.name_factory
+                                            FROM cost_ata_detail                                        
+                                            INNER JOIN product ON cost_ata_detail.id_product = product.id
+                                            INNER JOIN und ON cost_ata_detail.id_und = und.id
+                                            INNER JOIN factory ON cost_ata_detail.id_factory = factory.id"
+                                            );
+
+                $dataSetStatus = $result->fetchAll();
+
+                if($dataSetStatus)
+                {
+                    $findAllStatus = [];
+
+                    foreach ($dataSetStatus as $value) 
+                    {
+                        $costAtaDetail = new CostAtaDetail();
+                        $costAtaDetail->setId($value['id']);
+                        $costAtaDetail->setIdAtaCost($value['id_ata_cost']);
+                        $costAtaDetail->setPrAtaCost($value['pr_ata_cost']);
+                        $costAtaDetail->setIdClientAta($value['id_client_ata_cost']);
+                        $costAtaDetail->setItem($value['item']);
+                    }
+                }
+            
+
+        }
+
+        public function updateStatusDetail(CostAtaDetail $costAtaDetail)
+        {
+            try 
+            {
+                $tot = count(($costAtaDetail->getItem()));
+                
+                $id = $costAtaDetail->getId();
+                $status = 1;
+
+                for ($i=0; $i <$tot ; $i++) 
+                { 
+                    $result[] = $this->update('cost_ata_detail', 'status = :status', 
+                    [
+                        ':id' => $id, 
+                        ':status' => $status[$i]
+                    ], 
+                    "id = :id");
+                }
+                return $result;
+            } 
+            catch (Exception $ex) 
+            {
+                throw new Exception("Erro ao atualizar o status " . $ex->getMessage(), 500);
+            }      
+            
         }
 
         public function updateCostDetail(CostAtaDetail $costAtaDetail)
@@ -271,8 +346,7 @@ class CostAtaDetailDAO extends BaseDAO
         {
             
             
-            try {
-            
+            try {            
                 
                 $id = $costAtaDetail->getIdAtaCost();
                 

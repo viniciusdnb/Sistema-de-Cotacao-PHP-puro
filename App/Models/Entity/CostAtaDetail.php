@@ -30,6 +30,18 @@
         //atributo $costAta responsavel por armazenar o obejeto entidade costAta "cabeçalho"
         private $costAta;
 
+        private $status;
+
+        function setStatus($status)
+        {
+            $this->status = $status;
+        }
+
+        function getStatus()
+        {
+            return $this->status;
+        }
+
         /*function __construct()
         {
             $this->costAta = new CostAta();

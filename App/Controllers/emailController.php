@@ -25,6 +25,8 @@
 
                 $email->setFrom('viniciusdnb72@gmail.com');
                 $email->addAddress('viniciusdnb@hotmail.com');
+                $email->addAddress('suporte01@vitalhospitalar.com.br');
+                
                 $email->isHTML(true);
                 $email->Subject = 'este é o assunto';
                 $email->Body = 'corpo da mensagem';
