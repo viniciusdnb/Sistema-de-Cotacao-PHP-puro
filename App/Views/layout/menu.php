@@ -99,10 +99,10 @@
             </ul>
             <ul>
                 <li>
-                    <a href="#">
+                    <a href="http://<?php echo APP_HOST; ?>/email/index">
 
                         <p>
-                            Comercial
+                            Email
 
                         </p>
                     </a>
