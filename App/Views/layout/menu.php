@@ -90,10 +90,16 @@
                         </p>
                     </a>
                     <ul>
-                        <a href="http://<?php echo APP_HOST; ?>/costAta/index">
-
-                            <p> Custo de atas</p>
-                        </a>
+                        <li>
+                            <a href="http://<?php echo APP_HOST; ?>/costAta/index">
+                                <p> Custo de atas</p>
+                            </a>
+                        </li>
+                        <li> 
+                            <a href="http://<?php echo APP_HOST; ?>/itensCotacao/index">
+                                <p>Itens em cotação</p>
+                            </a>
+                        </li>
                     </ul>
                 </li>
             </ul>

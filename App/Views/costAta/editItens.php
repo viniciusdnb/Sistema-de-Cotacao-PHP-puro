@@ -1,20 +1,20 @@
 <?php
 
-                                    if ($Session::getMessage() !== "") {
+if ($Session::getMessage() !== "") {
 
-                                        echo '<div>';
-                                        echo $Session::getMessage();
-                                        $Session::unsetMessage();
-                                        echo '</div>';
-                                    }
+    echo '<div>';
+    echo $Session::getMessage();
+    $Session::unsetMessage();
+    echo '</div>';
+}
 
-                                    if ($Session::getErro() !== "") {
+if ($Session::getErro() !== "") {
 
-                                        echo '<div>';
-                                        echo $Session::getErro();
-                                        $Session::unsetErro();
-                                        echo '</div>';
-                                    }
+    echo '<div>';
+    echo $Session::getErro();
+    $Session::unsetErro();
+    echo '</div>';
+}
 
 
 
@@ -78,6 +78,7 @@
                     <th style="border: black 1px solid;">Unidade</th>
                     <th style="border: black 1px solid;">Fabricante</th>
                     <th style="border: black 1px solid;">Quantidade</th>
+                    <th style="border: black 1px solid;">Valor Cotado</th>
                     <th style="border: black 1px solid;">Valor Unitario</th>
                     <th style="border: black 1px solid;">Valor Total</th>
                     <th style="border: black 1px solid;">P1</th>
@@ -95,8 +96,7 @@
             <tbody>
                 <?php
 
-                if($viewVar['itens'])
-                {
+                if ($viewVar['itens']) {
                     $tot = count($viewVar['itens']->getId());
 
 
@@ -134,6 +134,7 @@
                         echo '</select></td>';
 
                         echo '<td><input type="text" value="' . number_format($viewVar['itens']->getQuantity()[$i], '0', ',', '.') . '" name="txt_quantity[]"></td>';
+                        echo '<td><input type="text" value="' . 'R$ ' . number_format($viewVar['itens']->getVlrCotado()[$i], '2', ',', '.') . ' "disabled>';
                         echo '<td><input type="text" value="' . 'R$ ' . number_format($viewVar['itens']->getCostUnity()[$i], '2', ',', '.') . '" name="txt_cost_unity[]"></td>';
                         echo '<td><input type="text" value="' . 'R$ ' . number_format($viewVar['itens']->getQuantity()[$i] * $viewVar['itens']->getCostUnity()[$i], '2', ',', '.') . '"></td>';
                         echo '<td><input type="text" value="' . $viewVar['itens']->getP1()[$i] . '" name="txt_p1[]"></td>';
@@ -148,13 +149,12 @@
                         echo '</tr>';
                         echo '<input type="hidden" value="' . $viewVar['itens']->getId()[$i] . '" name="id[]">';
                     }
-                }
-                else {
+                } else {
                     echo 'nao a item cadastrado';
                 }
-                
 
-                
+
+
 
 
                 ?>

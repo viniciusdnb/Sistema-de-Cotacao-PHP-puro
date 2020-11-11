@@ -1,10 +1,11 @@
 <div>
     <ol>
-        <li>Adm</li>
-        <li>Usuarios</li>
+        <li>Licitação</li>
+        <li>Custos de Atas</li>
         <li><a href="http://<?php echo APP_HOST ?>/costAta/index">Listar</a></li>
         <li><a href="http://<?php echo APP_HOST ?>/costAta/new">Cadastrar</a></li>
         <li><a href="http://<?php echo APP_HOST ?>/costAta/edit/<?php echo $viewVar['headerCostAta']->getId() ?>">Editar</a></li>
+        <li><a href="http://<?php echo APP_HOST ?>">Solicitar Cotação</a></li>
     </ol>
 </div>
 
@@ -81,13 +82,14 @@ if ($Session::getErro() !== "") {
     <table style="border: black 1px solid;">
         <thead>
             <tr>
-                <th style="border: black 1px solid;">opçoes</th>
+
                 <th style="border: black 1px solid;">Numero do Item</th>
                 <th style="border: black 1px solid;">Descricao Completa</th>
                 <th style="border: black 1px solid;">Produto</th>
                 <th style="border: black 1px solid;">Unidade</th>
                 <th style="border: black 1px solid;">Fabricante</th>
                 <th style="border: black 1px solid;">Quantidade</th>
+                <th style="border: black 1px solid;">Valor cotado</th>
                 <th style="border: black 1px solid;">Valor Unitario</th>
                 <th style="border: black 1px solid;">Valor Total</th>
                 <th style="border: black 1px solid;">P1</th>
@@ -112,7 +114,7 @@ if ($Session::getErro() !== "") {
                 for ($i = 0; $i < $tot; $i++) {
                     echo '<tr>';
 
-                    echo '<td><a href="http://' . APP_HOST . '/costAta/deleteItem/' . $viewVar['itens']->getId()[$i] . '/' . $viewVar['headerCostAta']->getId() . '">Excluir Item</a></td>';
+                    //echo '<td><a href="http://' . APP_HOST . '/costAta/deleteItem/' . $viewVar['itens']->getId()[$i] . '/' . $viewVar['headerCostAta']->getId() . '">Excluir Item</a></td>';
                     echo '<td><input type="text" value="' . $viewVar['itens']->getItem()[$i] . '" name="txt_number_item[]" disabled></td>';
                     echo '<td><input type="text" value="' . $viewVar['itens']->getDescCompProduct()[$i] . '" name="txt_desc_complete[]" disabled></td>';
 
@@ -141,6 +143,7 @@ if ($Session::getErro() !== "") {
                     echo '</select></td>';
 
                     echo '<td><input type="text" value="' . number_format($viewVar['itens']->getQuantity()[$i], '0', ',', '.') . '" name="txt_quantity[]" disabled></td>';
+                    echo '<td><input type="text" value="' . 'R$ ' . number_format($viewVar['itens']->getVlrCotado()[$i], '2', ',', '.') . ' "disabled>';
                     echo '<td><input type="text" value="' . 'R$ ' . number_format($viewVar['itens']->getCostUnity()[$i], '2', ',', '.') . '" name="txt_cost_unity[]" disabled></td>';
                     echo '<td><input type="text" value="' . 'R$ ' . number_format($viewVar['itens']->getQuantity()[$i] * $viewVar['itens']->getCostUnity()[$i], '2', ',', '.') . '" disabled></td>';
                     echo '<td><input type="text" value="' . $viewVar['itens']->getP1()[$i] . '" name="txt_p1[]" disabled></td>';

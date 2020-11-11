@@ -1,7 +1,7 @@
 <div>
     <ol>
-        <li>Adm</li>
-        <li>Usuarios</li>
+        <li>Licitação</li>
+        <li>Custos de Atas</li>
         <li><a href="http://<?php echo APP_HOST ?>/costAta/index">Listar</a></li>
         <li><a href="http://<?php echo APP_HOST ?>/costAta/new">Cadastrar</a></li>
     </ol>
@@ -40,7 +40,7 @@ if ($Session::getErro() !== "") {
                     <td>Data</td>
                     <td>Pr</td>
                     <td>Processo</td>
-                    
+
                 </tr>
             </thead>
             <tbody>
@@ -53,7 +53,7 @@ if ($Session::getErro() !== "") {
                     echo "<td><a href=http://" . APP_HOST . "/costAta/resume/" . $value->getId() . ">" . $value->getDate() . "</a></td>";
                     echo "<td><a href=http://" . APP_HOST . "/costAta/resume/" . $value->getId() . ">" . $value->getPr() . "</a></td>";
                     echo "<td><a href=http://" . APP_HOST . "/costAta/resume/" . $value->getId() . ">" . $value->getProcess() . "</a></td>";
-                    
+
                     echo "</tr>";
                 }
 

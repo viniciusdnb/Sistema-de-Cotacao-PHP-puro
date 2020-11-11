@@ -32,6 +32,18 @@
 
         private $status;
 
+        private $vlrCotado;
+
+        function setVlrCotado($vlrCotado)
+        {
+            $this->vlrCotado = $vlrCotado;
+        }
+
+        function getVlrCotado()
+        {
+            return $this->vlrCotado;
+        }
+
         function setStatus($status)
         {
             $this->status = $status;

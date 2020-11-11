@@ -325,6 +325,9 @@ class CostAtaController extends Controller
                 $costAtaDAO = new CostAtaDAO();
                 if($costAtaDAO->updateCostAta($costAta))
                 {
+                    $costAtaDetailDAO = new CostAtaDetailDAO();
+                    $costAtaDetailDAO->updateCostDetailIdClient($costAta);
+
                     Session::unsetMessage();
                     Session::setMessage('atualizado com sucesso');
                     $this->editItens($id);

@@ -3,7 +3,8 @@
     namespace App\Models\DAO;
 
     use App\Models\DAO\BaseDAO;
-    use App\Models\Entity\CostAtaDetail;
+use App\Models\Entity\CostAta;
+use App\Models\Entity\CostAtaDetail;
     use Exception;
 use PDO;
 use PDOException;
@@ -96,6 +97,7 @@ class CostAtaDetailDAO extends BaseDAO
                                                 cost_ata_detail.p3,                                                
                                                 cost_ata_detail.minimum,
                                                 cost_ata_detail.status,
+                                                cost_ata_Detail.vlr_cotado,
                                                 product.desc_prod,
                                                 und.und,
                                                 factory.name_factory
@@ -131,6 +133,7 @@ class CostAtaDetailDAO extends BaseDAO
                     $und[]                      = $dataSetCostAtaDetail[$i]['und'];
                     $nameFactory[]              = $dataSetCostAtaDetail[$i]['name_factory'];
                     $status[]                   = $dataSetCostAtaDetail[$i]['status'];
+                    $vlrCotado[]                = $dataSetCostAtaDetail[$i]['vlr_cotado'];
                 }
 
                 $costAtaDetail = new CostAtaDetail();
@@ -153,6 +156,7 @@ class CostAtaDetailDAO extends BaseDAO
                 $costAtaDetail->setP3($p3);
                 $costAtaDetail->setMinimum($minimum);
                 $costAtaDetail->setStatus($status);
+                $costAtaDetail->setVlrCotado($vlrCotado);
                 return $costAtaDetail;
            }     
         }
@@ -227,14 +231,16 @@ class CostAtaDetailDAO extends BaseDAO
                                                 cost_ata_detail.quantity,
                                                 cost_ata_detail.id_factory,                                                
                                                 cost_ata_detail.status,
+                                                cost_ata_Detail.vlr_cotado,
                                                 product.desc_prod,
                                                 und.und,
                                                 factory.name_factory
                                             FROM cost_ata_detail                                        
                                             INNER JOIN product ON cost_ata_detail.id_product = product.id
                                             INNER JOIN und ON cost_ata_detail.id_und = und.id
-                                            INNER JOIN factory ON cost_ata_detail.id_factory = factory.id"
-                                            );
+                                            INNER JOIN factory ON cost_ata_detail.id_factory = factory.id
+                                            WHERE cost_ata_Detail.status = 0;
+                                            ");
 
                 $dataSetStatus = $result->fetchAll();
 
@@ -250,9 +256,24 @@ class CostAtaDetailDAO extends BaseDAO
                         $costAtaDetail->setPrAtaCost($value['pr_ata_cost']);
                         $costAtaDetail->setIdClientAta($value['id_client_ata_cost']);
                         $costAtaDetail->setItem($value['item']);
+                        $costAtaDetail->setDescCompProduct($value['desc_comp_product']);
+                        $costAtaDetail->setIdProduct($value['id_product']);
+                        $costAtaDetail->setIdUnd($value['id_und']);
+                        $costAtaDetail->setQuantity($value['quantity']);
+                        $costAtaDetail->setIdFactory($value['id_factory']);
+                        $costAtaDetail->setStatus($value['status']);
+                        $costAtaDetail->setVlrCotado($value['vlr_cotado']);
+                        
+                    
+                        $findAllStatus[] = $costAtaDetail;
                     }
-                }
             
+                    return $findAllStatus;
+                }
+                else 
+                {
+                    return FALSE;    
+                }
 
         }
 
@@ -281,6 +302,25 @@ class CostAtaDetailDAO extends BaseDAO
                 throw new Exception("Erro ao atualizar o status " . $ex->getMessage(), 500);
             }      
             
+        }
+
+        public function updateCostDetailIdClient(CostAta $costAta)
+        {
+            try
+            {
+                $idCliet = $costAta->getIdClient();
+                $idAta   = $costAta->getId();
+                return $this->update('cost_ata_detail', 'id_client_ata_cost = :id_client_ata_cost',
+                [   ':id_ata_cost'          => $idAta,
+                    ':id_client_ata_cost'   => $idCliet
+                ],
+                "id_ata_cost = :id_ata_cost" 
+                );
+            }
+            catch (PDOException $ex) 
+            {
+                throw new Exception("Erro ao atualizar " . $ex->getMessage(), 500);
+            }      
         }
 
         public function updateCostDetail(CostAtaDetail $costAtaDetail)
@@ -333,7 +373,7 @@ class CostAtaDetailDAO extends BaseDAO
                         "id = :id"                        
                     );
                 }
-                var_dump($result);
+               
                 return $result;
             } 
             catch (PDOException $ex) 
