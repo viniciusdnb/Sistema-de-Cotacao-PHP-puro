@@ -5,7 +5,7 @@
         <li><a href="http://<?php echo APP_HOST ?>/costAta/index">Listar</a></li>
         <li><a href="http://<?php echo APP_HOST ?>/costAta/new">Cadastrar</a></li>
         <li><a href="http://<?php echo APP_HOST ?>/costAta/edit/<?php echo $viewVar['headerCostAta']->getId() ?>">Editar</a></li>
-        <li><a href="http://<?php echo APP_HOST ?>">Solicitar Cotação</a></li>
+        <li><a href="http://<?php echo APP_HOST ?>/cotacao/submit/<?php echo $viewVar['headerCostAta']->getId() ?>">Solicitar Cotação</a></li>
     </ol>
 </div>
 

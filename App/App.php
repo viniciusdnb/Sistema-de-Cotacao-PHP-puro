@@ -33,6 +33,9 @@
             //title configuration with business name
             define('TITLE'      , "vitalhospitalar");
 
+            define('EMAIL_USER', "suporte01@vitalhospitalar.com.br");
+            define('EMAIL_PASS', "@vital2019");
+
             $this->url();           
            
         }

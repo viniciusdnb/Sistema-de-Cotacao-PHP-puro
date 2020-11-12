@@ -35,7 +35,7 @@
             {
                 $name       = strtoupper(filter_var($_POST['txt_name'], FILTER_SANITIZE_SPECIAL_CHARS));
                 $addres     = strtoupper(filter_var($_POST['txt_addres'], FILTER_SANITIZE_SPECIAL_CHARS));
-                $email      = strtoupper(filter_var($_POST['txt_email'], FILTER_SANITIZE_SPECIAL_CHARS));
+                $email      = filter_var($_POST['txt_email'], FILTER_SANITIZE_SPECIAL_CHARS);
                 $cnpj       = strtoupper(filter_var($_POST['txt_cnpj'], FILTER_SANITIZE_SPECIAL_CHARS));
                 $phone      = strtoupper(filter_var($_POST['txt_phone'], FILTER_SANITIZE_SPECIAL_CHARS));
                 $contact    = strtoupper(filter_var($_POST['txt_contact'],FILTER_SANITIZE_SPECIAL_CHARS));
@@ -70,7 +70,7 @@
                 $id         = filter_var($_POST['id'], FILTER_SANITIZE_SPECIAL_CHARS); 
                 $name       = strtoupper(filter_var($_POST['txt_name'], FILTER_SANITIZE_SPECIAL_CHARS));
                 $addres     = strtoupper(filter_var($_POST['txt_addres'], FILTER_SANITIZE_SPECIAL_CHARS));
-                $email      = strtoupper(filter_var($_POST['txt_email'], FILTER_SANITIZE_SPECIAL_CHARS));
+                $email      = filter_var($_POST['txt_email'], FILTER_SANITIZE_SPECIAL_CHARS);
                 $cnpj       = strtoupper(filter_var($_POST['txt_cnpj'], FILTER_SANITIZE_SPECIAL_CHARS));
                 $phone      = strtoupper(filter_var($_POST['txt_phone'], FILTER_SANITIZE_SPECIAL_CHARS));
                 $contact    = strtoupper(filter_var($_POST['txt_contact'], FILTER_SANITIZE_SPECIAL_CHARS));
