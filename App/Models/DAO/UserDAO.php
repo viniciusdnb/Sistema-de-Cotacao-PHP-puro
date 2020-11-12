@@ -19,6 +19,7 @@
 
             $dateSetUser = $result->fetch();
             
+            
             if($dateSetUser)
             {
                 $user = new User();

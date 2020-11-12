@@ -7,16 +7,16 @@
         private $id;
         private $name;
         private $pass;
-        private $perm;
+        private $id_perm;
 
-        public function setPerm($perm)
+        public function setPerm($id_perm)
         {
-            $this->perm = $perm;
+            $this->id_perm = $id_perm;
         }
 
         public function getPerm()
         {
-            return $this->perm;
+            return $this->id_perm;
         }
 
         public function getId()

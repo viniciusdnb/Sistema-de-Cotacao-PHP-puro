@@ -25,10 +25,21 @@ class Controller
 
             if($_SESSION['user'])
             {
-                require_once PATH . '/App/Views/layout/header.php';
-                require_once PATH . '/App/Views/layout/menu.php';
-                require_once PATH . '/App/Views/' . $view . '.php';
-                require_once PATH . '/App/Views/layout/footer.php';
+                if($_SESSION['perm'] == 1)
+                {
+                    require_once PATH . '/App/Views/layout/header.php';
+                    require_once PATH . '/App/Views/layout/menu.php';
+                    require_once PATH . '/App/Views/' . $view . '.php';
+                    require_once PATH . '/App/Views/layout/footer.php';
+                }
+                else if($_SESSION['perm'] == 7)
+                {
+                    require_once PATH . '/App/Views/layout/header.php';
+                    require_once PATH . '/App/Views/layout/menuOperational.php';
+                    require_once PATH . '/App/Views/' . $view . '.php';
+                    require_once PATH . '/App/Views/layout/footer.php';
+                }
+                
             }else{
             require_once PATH . '/App/Views/layout/header.php';
 
