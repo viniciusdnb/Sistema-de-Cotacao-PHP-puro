@@ -26,7 +26,7 @@
         <nav>
             <ul>
                 <li>
-                    <a>
+                    <a href="http://<?php echo APP_HOST; ?>/cotacao/opened">
                         <p>Cotação em aberto</p>
                     </a>
                 </li>

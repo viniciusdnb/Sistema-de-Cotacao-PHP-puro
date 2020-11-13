@@ -8,6 +8,18 @@
         private $name;
         private $pass;
         private $id_perm;
+        private $id_factory;
+
+        public function setIdFactory($id_factory)
+        {
+            $this->id_factory = $id_factory;
+        }
+
+        public function getIdFactory()
+        {
+            return $this->id_factory;
+        }        
+
 
         public function setPerm($id_perm)
         {

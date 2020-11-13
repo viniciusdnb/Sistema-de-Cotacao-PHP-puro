@@ -10,7 +10,7 @@
         //funcao que busca por id
         public  function findId($id)
         {
-            $result = $this->select("SELECT user.id, user.name, user.pass, user.active, user.id_perm, user.email,
+            $result = $this->select("SELECT user.id, user.name, user.pass, user.active, user.id_perm, user.email, user.id_factory,
                         permission.type, permission.type_name, permission.perm, permission.perm_name
                         FROM user
                         INNER JOIN permission
@@ -33,6 +33,7 @@
                 $user->setPerm($dateSetUser['perm']);
                 $user->setPermName($dateSetUser['perm_name']);
                 $user->setEmail($dateSetUser['email']);
+                $user->setIdFactory($dateSetUser['id_factory']);
 
                 return $user;
             }else{
@@ -44,7 +45,7 @@
         //funcao que busca todos e retorna um array de objetos
         public function findAll()
         {
-            $result = $this->select("SELECT user.id, user.name, user.pass, user.active, user.id_perm, user.email,
+            $result = $this->select("SELECT user.id, user.name, user.pass, user.active, user.id_perm, user.email, user.id_factory,
                             permission.type, permission.type_name, permission.perm, permission.perm_name
                             FROM user
                             INNER JOIN permission
@@ -69,6 +70,7 @@
                     $user->setPerm($dateSetUser['perm']);
                     $user->setPermName($dateSetUser['perm_name']);
                     $user->setEmail($dateSetUser['email']);
+                    $user->setIdFactory($dateSetUser['id_factory']);
                     $findAll[] = $user;
                 }
                 
@@ -88,19 +90,21 @@
         public function insertUser(User $user)
         {
             try {
-                $name   = $user->getName();
-                $pass   = $user->getPass();
-                $active = $user->getActive();
-                $idPerm = $user->getIdPerm();
-                $email  = $user->getEmail();
+                $name       = $user->getName();
+                $pass       = $user->getPass();
+                $active     = $user->getActive();
+                $idPerm     = $user->getIdPerm();
+                $email      = $user->getEmail();
+                $idFactory  = $user->getIdFactory();
                 
-                return $this->insert('user', ':name, :pass, :active, :id_Perm, :email', 
+                return $this->insert('user', ':name, :pass, :active, :id_Perm, :email, :id_factory', 
                     [
                        ':name'          => $name,
                        ':pass'          => $pass,
                        ':active'        => $active,
                        ':id_Perm'       => $idPerm,
-                       ':email'         => $email
+                       ':email'         => $email,
+                       ':id_factory'    => $idFactory
                     ]
                 );                
                 
@@ -115,19 +119,21 @@
         public function updateUser(User $user)
         {
             try {
-                $id     = $user->getId();
-                $name   = $user->getName();                
-                $active = $user->getActive();
-                $idperm = $user->getIdPerm();
-                $email  = $user->getEmail();
+                $id         = $user->getId();
+                $name       = $user->getName();                
+                $active     = $user->getActive();
+                $idperm     = $user->getIdPerm();
+                $email      = $user->getEmail();
+                $idFactory  = $user->getIdFactory();
                 
-                return $this->update('user', 'name = :name, active = :active, id_perm = :id_perm, email = :email',
+                return $this->update('user', 'name = :name, active = :active, id_perm = :id_perm, email = :email, id_factory = :id_factory',
                     [
                         ':id'           => $id,
                         ':name'         => $name,                        
                         ':active'       => $active,
                         ':id_perm'      => $idperm,
-                        ':email'        => $email
+                        ':email'        => $email,
+                        ':id_factory'   => $idFactory
                     ],
                     "id = :id"
                 );

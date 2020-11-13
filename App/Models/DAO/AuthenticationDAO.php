@@ -8,7 +8,7 @@
     {
         public function verify($name)
         {
-            $sql = "SELECT name, pass, active, id_perm FROM user WHERE name = '$name'";
+            $sql = "SELECT name, pass, active, id_perm, id_factory FROM user WHERE name = '$name'";
             $result = $this->select($sql);
 
             return $result->fetchObject(Authentication::class);

@@ -14,8 +14,17 @@
         private $perm;
         private $permName;
         private $email;
+        private $idFactory;
 
-        
+        public function setIdFactory($idFactory)
+        {
+            $this->idFactory = $idFactory;
+        }
+
+        public function getIdFactory()
+        {
+            return $this->idFactory;
+        }        
 
         public function setId($id)
         {

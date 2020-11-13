@@ -84,6 +84,22 @@
                 <input type="email" name="txt_email" value="<?php echo $viewVar['findIdUser']->getEmail(); ?>">
             </div>
 
+            <di>
+                <label>Opcional Fabricante</label>
+                <select name="txt_id_factory">                    
+                    <?php
+
+                    foreach ($viewVar['factory'] as $factory) {
+                        echo '<option value="' . $factory->getId() .'"';
+                        echo $factory->getId() == $viewVar['findIdUser']->getIdFactory() ? 'selected="selected"' : "";
+                        echo '>' . $factory->getNameFactory() . '</option>';
+                    }
+
+                    ?>
+                </select>
+            </di>
+
+
             <input type="hidden" name="id" value="<?php echo $viewVar['findIdUser']->getId(); ?>" </div> <div>
             <button type="submit">Atualizar</button>
             <a href="http://<?php echo APP_HOST; ?>/user/index">Cancelar</a>

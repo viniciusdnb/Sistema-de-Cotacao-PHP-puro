@@ -217,6 +217,61 @@ class CostAtaDetailDAO extends BaseDAO
                 throw new Exception("Erro ao cadastrar " . $ex->getMessage(), 500);
             }      
         }
+        public function findAllStatusIdFactory($idFac)
+        {
+            $result = $this->select("SELECT cost_ata_detail.id,
+                                                    cost_ata_detail.id_ata_cost,
+                                                    cost_ata_detail.pr_ata_cost,
+                                                    cost_ata_detail.id_client_ata_cost,
+                                                    cost_ata_detail.item,
+                                                    cost_ata_detail.desc_comp_product,
+                                                    cost_ata_detail.id_product,
+                                                    cost_ata_detail.id_und,
+                                                    cost_ata_detail.quantity,
+                                                    cost_ata_detail.id_factory,                                                
+                                                    cost_ata_detail.status,
+                                                    cost_ata_Detail.vlr_cotado,
+                                                    product.desc_prod,
+                                                    und.und,
+                                                    factory.name_factory
+                                                FROM cost_ata_detail                                        
+                                                INNER JOIN product ON cost_ata_detail.id_product = product.id
+                                                INNER JOIN und ON cost_ata_detail.id_und = und.id
+                                                INNER JOIN factory ON cost_ata_detail.id_factory = factory.id
+                                                WHERE cost_ata_detail.id_factory = '$idFac' 
+                                                AND cost_ata_Detail.vlr_cotado = 0"
+                                                );
+
+            $dataSetStatus = $result->fetchAll();
+
+            if ($dataSetStatus) {
+                $findAllStatus = [];
+
+                foreach ($dataSetStatus as $value) {
+                    $costAtaDetail = new CostAtaDetail();
+                    $costAtaDetail->setId($value['id']);
+                    $costAtaDetail->setIdAtaCost($value['id_ata_cost']);
+                    $costAtaDetail->setPrAtaCost($value['pr_ata_cost']);
+                    $costAtaDetail->setIdClientAta($value['id_client_ata_cost']);
+                    $costAtaDetail->setItem($value['item']);
+                    $costAtaDetail->setDescCompProduct($value['desc_comp_product']);
+                    $costAtaDetail->setIdProduct($value['id_product']);
+                    $costAtaDetail->setIdUnd($value['id_und']);
+                    $costAtaDetail->setQuantity($value['quantity']);
+                    $costAtaDetail->setIdFactory($value['id_factory']);
+                    $costAtaDetail->setStatus($value['status']);
+                    $costAtaDetail->setVlrCotado($value['vlr_cotado']);
+
+
+                    $findAllStatus[] = $costAtaDetail;
+                }
+
+                return $findAllStatus;
+            } else {
+                return FALSE;
+            }
+
+        }
 
         public function findAllStatus($idAta = NULL, bool $type)
         {
@@ -233,6 +288,8 @@ class CostAtaDetailDAO extends BaseDAO
             {
                 $where = "WHERE cost_ata_detail.vlr_cotado > 0";
             }
+
+
             $result = $this->select('SELECT cost_ata_detail.id,
                                                 cost_ata_detail.id_ata_cost,
                                                 cost_ata_detail.pr_ata_cost,

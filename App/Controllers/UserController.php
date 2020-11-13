@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Controllers\Controller;
 use App\Libs\Session;
+use App\Models\DAO\FactoryDAO;
 use App\Models\DAO\PermissionDAO;
 use App\Models\DAO\UserDAO;
 use App\Models\Entity\User;
@@ -25,6 +26,9 @@ class UserController extends Controller
     {
         $permDAO = new PermissionDAO();
         $this->setViewParam('findAll', $permDAO->findAll());
+
+        $factoryDAO = new FactoryDAO();
+        $this->setViewParam('factory', $factoryDAO->findAll());
         
         //instaciar o objeto de permissao para que possa ser passada as opçoes para cadastro
         $this->render('/user/insert');
@@ -42,7 +46,7 @@ class UserController extends Controller
             $active = strtoupper(filter_var($_POST['txt_active'], FILTER_SANITIZE_SPECIAL_CHARS));
             $perm = strtoupper(filter_var($_POST['txt_perm'], FILTER_SANITIZE_SPECIAL_CHARS));
             $email = strtoupper((filter_var($_POST['txt_email'], FILTER_SANITIZE_SPECIAL_CHARS)));
-           
+            $idfactory  =  filter_var($_POST['txt_id_factory'], FILTER_SANITIZE_SPECIAL_CHARS);
 
             $user = new User();
             $user->setName($name);
@@ -50,6 +54,7 @@ class UserController extends Controller
             $user->setActive($active);
             $user->setIdPerm($perm);
             $user->setEmail($email);
+            $user->setIdFactory($idfactory);
 
             $userDAO = new UserDAO();
             $userDAO->insertUser($user);
@@ -76,6 +81,9 @@ class UserController extends Controller
         $perm = new PermissionDAO();
         $this->setViewParam('findAllPerm', $perm->findAll());
 
+        $factoryDAO = new FactoryDAO();
+        $this->setViewParam('factory', $factoryDAO->findAll());
+
         $this->render('/user/edit');
         
     }
@@ -88,11 +96,12 @@ class UserController extends Controller
        {  
             
 
-            $name = strtoupper(filter_var($_POST['txt_name'], FILTER_SANITIZE_SPECIAL_CHARS));
-            $id = strtoupper(filter_var($_POST['id'], FILTER_SANITIZE_SPECIAL_CHARS));           
-            $active = strtoupper(filter_var($_POST['txt_active'], FILTER_SANITIZE_SPECIAL_CHARS));
-            $perm = strtoupper(filter_var($_POST['txt_perm'], FILTER_SANITIZE_SPECIAL_CHARS));
-            $email = strtoupper((filter_var($_POST['txt_email'], FILTER_SANITIZE_SPECIAL_CHARS)));
+            $name       = strtoupper(filter_var($_POST['txt_name'], FILTER_SANITIZE_SPECIAL_CHARS));
+            $id         = strtoupper(filter_var($_POST['id'], FILTER_SANITIZE_SPECIAL_CHARS));           
+            $active     = strtoupper(filter_var($_POST['txt_active'], FILTER_SANITIZE_SPECIAL_CHARS));
+            $perm       = strtoupper(filter_var($_POST['txt_perm'], FILTER_SANITIZE_SPECIAL_CHARS));
+            $email      = strtoupper((filter_var($_POST['txt_email'], FILTER_SANITIZE_SPECIAL_CHARS)));
+            $idfactory  =  filter_var($_POST['txt_id_factory'], FILTER_SANITIZE_SPECIAL_CHARS);
 
             $user = new User();
             $user->setId($id);
@@ -100,7 +109,7 @@ class UserController extends Controller
             $user->setActive($active);
             $user->setIdPerm($perm);
             $user->setEmail($email);
-            
+            $user->setIdFactory($idfactory);
 
             $userDAO = new UserDAO();
             $userDAO->updateUser($user);

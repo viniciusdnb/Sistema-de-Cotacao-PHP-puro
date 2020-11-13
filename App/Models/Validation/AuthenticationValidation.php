@@ -15,9 +15,9 @@
             {
                 if(password_verify($authentication->getPass(), $userDAO->getPass()))
                 {
-                    $_SESSION['user'] = $userDAO->getName();
-                    $_SESSION['perm'] = $userDAO->getPerm();
-
+                    $_SESSION['user']       = $userDAO->getName();
+                    $_SESSION['perm']       = $userDAO->getPerm();
+                    $_SESSION['idFactory']  = $userDAO->getIdFactory();
                     return TRUE;
                 }
                 else

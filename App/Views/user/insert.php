@@ -42,6 +42,7 @@
             <div>
                 <label>Permissão:</label>
                 <select name="txt_perm">
+                    <option>Selecione..</option>
                     <?php
 
                     foreach ($viewVar['findAll'] as $value) {
@@ -51,6 +52,19 @@
                     ?>
                 </select>
             </div>
+            <di>
+                <label>Opcional Fabricante</label>
+                <select name="txt_id_factory">
+                    <option>Selecione..</option>
+                    <?php
+
+                    foreach ($viewVar['factory'] as $factory) {
+                        echo '<option value="' . $factory->getId() . '>' . $factory->getNameFactory() . '</option>';
+                    }
+
+                    ?>
+                </select>
+            </di>
 
 
 
