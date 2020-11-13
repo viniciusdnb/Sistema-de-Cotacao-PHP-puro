@@ -218,16 +218,20 @@ class CostAtaDetailDAO extends BaseDAO
             }      
         }
 
-        public function findAllStatus($idAta = NULL)
+        public function findAllStatus($idAta = NULL, bool $type)
         {
 
-            if($idAta == NULL)
+            if($idAta == NULL && $type == 0)
             {
                 $where = "";
             }
-            else
+            else if(!$idAta == NULL && $type == 0)
             {
-                $where = "AND cost_ata_detail.id_ata_cost = '$idAta'";
+                $where = "WHERE cost_ata_detail.status = 0 AND cost_ata_detail.id_ata_cost = '$idAta'";
+            }
+            else if($idAta == NULL && $type == 1)
+            {
+                $where = "WHERE cost_ata_detail.vlr_cotado > 0";
             }
             $result = $this->select('SELECT cost_ata_detail.id,
                                                 cost_ata_detail.id_ata_cost,
@@ -248,7 +252,7 @@ class CostAtaDetailDAO extends BaseDAO
                                             INNER JOIN product ON cost_ata_detail.id_product = product.id
                                             INNER JOIN und ON cost_ata_detail.id_und = und.id
                                             INNER JOIN factory ON cost_ata_detail.id_factory = factory.id
-                                            WHERE cost_ata_Detail.status = 0 '. $where
+                                            '. $where
                                             );
 
                 $dataSetStatus = $result->fetchAll();
