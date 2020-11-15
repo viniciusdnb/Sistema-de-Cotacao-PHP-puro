@@ -20,35 +20,43 @@ class CotacaoController extends Controller
             $userIdFactory = $_SESSION['idFactory'];
             
             $costAtaDetailDAO = new CostAtaDetailDAO();
-            $dataSetCost = $costAtaDetailDAO->findAllStatusIdFactory($userIdFactory);
+            if($dataSetCost = $costAtaDetailDAO->findAllStatusIdFactory($userIdFactory))
+            {
+                foreach ($dataSetCost as $value) {
+                    $id[] = $value->getId();
+                    $idClient[] = $value->getIdClientAta();
+                    $desc[] = $value->getDescCompProduct();
+                    $idUnd[] = $value->getIdUnd();
+                    $quantity[] = $value->getQuantity();
+                }
 
-            foreach ($dataSetCost as $value) {
-                $id[] = $value->getId();
-                $idClient[] = $value->getIdClientAta();
-                $desc[] = $value->getDescCompProduct();
-                $idUnd[] = $value->getIdUnd();
-                $quantity[] = $value->getQuantity();
-                
+                $costAtaDetail = new CostAtaDetail();
+                $costAtaDetail->setId($id);
+                $costAtaDetail->setIdClientAta($idClient);
+                $costAtaDetail->setDescCompProduct($desc);
+                $costAtaDetail->setIdUnd($idUnd);
+                $costAtaDetail->setQuantity($quantity);
+
+
+                $this->setViewParam('itens', $costAtaDetail);
+
+                $undDAO = new UndDAO();
+                $this->setViewParam('und', $undDAO->findAll());
+
+                $clientDAO = new ClientDAO();
+                $this->setViewParam('client', $clientDAO->findAll());
+
+
+                $this->render('/cotacao/opened');
+            }
+            else
+            {
+                Session::unsetErro();
+                Session::setErro("Não a item para ser cotado no momento");
+                $this->history();
             }
 
-            $costAtaDetail = new CostAtaDetail();
-            $costAtaDetail->setId($id);
-            $costAtaDetail->setIdClientAta($idClient);
-            $costAtaDetail->setDescCompProduct($desc);
-            $costAtaDetail->setIdUnd($idUnd);
-            $costAtaDetail->setQuantity($quantity);
             
-
-            $this->setViewParam('itens', $costAtaDetail);
-
-            $undDAO = new UndDAO();
-            $this->setViewParam('und', $undDAO->findAll());
-
-            $clientDAO = new ClientDAO();
-            $this->setViewParam('client', $clientDAO->findAll());
-
-
-            $this->render('/cotacao/opened');
 
 
         }
@@ -56,36 +64,45 @@ class CotacaoController extends Controller
         public function history()
         {
             $costAtaDetailDAO = new CostAtaDetailDAO();
-            $dataSetCost = $costAtaDetailDAO->findAllStatus("",1);
-
-            foreach ($dataSetCost as $value) 
+            if($dataSetCost = $costAtaDetailDAO->findAllStatus("",1))
             {
-                $id[] = $value->getId();
-                $idClient[] = $value->getIdClientAta();
-                $desc[] = $value->getDescCompProduct();
-                $idUnd[] = $value->getIdUnd();
-                $quantity[] = $value->getQuantity();
-                $vlrCotado[] = $value->getVlrCotado();
+                foreach ($dataSetCost as $value) {
+                    $id[] = $value->getId();
+                    $idClient[] = $value->getIdClientAta();
+                    $desc[] = $value->getDescCompProduct();
+                    $idUnd[] = $value->getIdUnd();
+                    $quantity[] = $value->getQuantity();
+                    $vlrCotado[] = $value->getVlrCotado();
+                }
+
+                $costAtaDetail = new CostAtaDetail();
+                $costAtaDetail->setId($id);
+                $costAtaDetail->setIdClientAta($idClient);
+                $costAtaDetail->setDescCompProduct($desc);
+                $costAtaDetail->setIdUnd($idUnd);
+                $costAtaDetail->setQuantity($quantity);
+                $costAtaDetail->setVlrCotado($vlrCotado);
+
+                $this->setViewParam('itens', $costAtaDetail);
+
+                $undDAO = new UndDAO();
+                $this->setViewParam('und', $undDAO->findAll());
+
+                $clientDAO = new ClientDAO();
+                $this->setViewParam('client', $clientDAO->findAll());
+
+
+                $this->render('/cotacao/history');
+            }
+            else
+            {
+                Session::unsetErro();
+                Session::setErro("Não a item para ser cotado no momento");
+                $this->render('/home/index');
             }
 
-            $costAtaDetail = new CostAtaDetail();
-            $costAtaDetail->setId($id);
-            $costAtaDetail->setIdClientAta($idClient);
-            $costAtaDetail->setDescCompProduct($desc);
-            $costAtaDetail->setIdUnd($idUnd);
-            $costAtaDetail->setQuantity($quantity);
-            $costAtaDetail->setVlrCotado($vlrCotado);
 
-            $this->setViewParam('itens', $costAtaDetail);           
-
-            $undDAO = new UndDAO();
-            $this->setViewParam('und', $undDAO->findAll());
-
-            $clientDAO = new ClientDAO();
-            $this->setViewParam('client', $clientDAO->findAll());
-
-
-            $this->render('/cotacao/history');
+            
 
             
             
@@ -145,22 +162,37 @@ class CotacaoController extends Controller
 
         public function insert()
         {
+            //var_dump($_POST);
+
+            //var_dump(count($_POST['id']));
+
             if($_POST)
             {
-                $id     = filter_var($_POST['id'], FILTER_SANITIZE_SPECIAL_CHARS);
-                $vlr    = filter_var($_POST['txt_vlr_cotado'], FILTER_SANITIZE_SPECIAL_CHARS);
+                $tot = count($_POST['id']);
+
+                for ($i=0; $i < $tot ; $i++) { 
+                   if($_POST['txt_vlr_cotado'][$i] != 0)
+                   {
+                       $id[]    = filter_var($_POST['id'][$i], FILTER_SANITIZE_SPECIAL_CHARS);
+                       $vlr[]   = filter_var($_POST['txt_vlr_cotado'][$i], FILTER_SANITIZE_SPECIAL_CHARS);
+                   }
+                }
+
+              
 
                 $costAtaDetail = new CostAtaDetail();
                 $costAtaDetail->setId($id);
                 $costAtaDetail->setVlrCotado($vlr);
 
                 $cotacao = new CotacaoDAO();
-                if($cotacao->insertCotacao($costAtaDetail))
+            
+               if($cotacao->insertCotacao($costAtaDetail, $tot))
                 {
                     Session::unsetMessage();
                     Session::getErro('Cotação salva com sucesso');
                     $this->history();
-                }else
+                }
+                else
                 {
                     Session::unsetErro();
                     Session::setErro("Erro ao salvar a cotacao");

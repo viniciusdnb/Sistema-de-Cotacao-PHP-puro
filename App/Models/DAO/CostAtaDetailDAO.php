@@ -3,13 +3,13 @@
     namespace App\Models\DAO;
 
     use App\Models\DAO\BaseDAO;
-use App\Models\Entity\CostAta;
-use App\Models\Entity\CostAtaDetail;
+    use App\Models\Entity\CostAta;
+    use App\Models\Entity\CostAtaDetail;
     use Exception;
-use PDO;
-use PDOException;
+    use PDO;
+    use PDOException;
 
-class CostAtaDetailDAO extends BaseDAO
+    class CostAtaDetailDAO extends BaseDAO
     {
         public function findId($id)
         {

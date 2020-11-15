@@ -1,3 +1,25 @@
+<?php
+
+
+        if ($Session::getMessage() !== "") {
+
+            echo '<div>';
+            echo $Session::getMessage();
+            $Session::unsetMessage();
+            echo '</div>';
+        }
+
+        if ($Session::getErro() !== "") {
+
+            echo '<div>';
+            echo $Session::getErro();
+            $Session::unsetErro();
+            echo '</div>';
+        }
+
+
+?>
+
 <table>
     <thead>
         <tr>
@@ -10,9 +32,10 @@
         </tr>
     </thead>
     <tbody>
+    
         <?php
-        
 
+      
             if ($viewVar['itens']) {
                 $tot = count($viewVar['itens']->getId());
                 
@@ -37,7 +60,7 @@
                     echo '</td>';
 
                     echo '<td>' . number_format($viewVar['itens']->getQuantity()[$i], '0', ',', '.') . '</td>';
-                    echo '<td>' . '<R$ >' . number_format($viewVar['itens']->getVlrCotado()[$i], '2', ',', '.').'</td>';
+                    echo '<td>' . 'R$ ' . number_format($viewVar['itens']->getVlrCotado()[$i], '2', ',', '.').'</td>';
                     echo '<td><input type="text"></td>';
                 echo '</tr>';
                 }
