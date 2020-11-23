@@ -73,7 +73,7 @@
                 <?php
                 $a = 0;
                 while ($a < 3) {
-                    echo '<tr>';
+                    echo '<tr class="item">';
                     echo '<td><input type="text" name="txt_number_item[]"></td>';
                     echo '<td><textarea name="txt_desc_complete[]"></textarea></td>';
 
@@ -94,9 +94,9 @@
                         echo '<option value="' . $value->getId() . '">' . $value->getNameFactory() . '</option>';
                     }
                     echo '</td></select>';
-                    echo '<td><input type="text" name="txt_quantity[]"></td>';
-                    echo '<td><input type="text" name="txt_cost_unity[]"></td>';
-                    echo '<td><input type="text" name="txt_cost_total[]"></td>';
+                    echo '<td><input type="text" name="txt_quantity[]" class="quantity"></td>';
+                    echo '<td><input type="text" name="txt_cost_unity[]" class="vlr_unity"></td>';
+                    echo '<td><input type="text" name="txt_cost_total[]" class="total" value="0"></td>';
                     echo '<td><input type="text" name="txt_p1[]"></td>';
                     echo '<td><input type="text" name="txt_p1_total[]"></td>';
                     echo '<td><input type="text" name="txt_p2[]"></td>';
