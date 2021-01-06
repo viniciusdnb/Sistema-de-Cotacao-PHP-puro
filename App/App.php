@@ -19,9 +19,9 @@
             //database configuration
             define('DB_DRIVER'  , "mysql");
             define('DB_HOST'    , "localhost");
-            define('DB_NAME'    , "vitalhospitalar");
+            define('DB_NAME'    , "sistemalicitacao");
             define('DB_USER'    , "root");
-            define('DB_PASS'    , "");
+            define('DB_PASS'    , "root");
 
             //configuiração de url com o nome da empresa 
             //url configuration with business name
@@ -31,10 +31,10 @@
 
             //configuração do titulo com o nome da empresa
             //title configuration with business name
-            define('TITLE'      , "vitalhospitalar");
+            define('TITLE'      , "sistemalicitacao");
 
-            define('EMAIL_USER', "suporte01@vitalhospitalar.com.br");
-            define('EMAIL_PASS', "@vital2019");
+            define('EMAIL_USER', "");
+            define('EMAIL_PASS', "");
 
             $this->url();           
            
